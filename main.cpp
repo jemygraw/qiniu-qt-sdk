@@ -7,7 +7,5 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     QNMainWindow w;
     w.show();
-    Base64Test t;
-    QTest::qExec(&t);
     return a.exec();
 }

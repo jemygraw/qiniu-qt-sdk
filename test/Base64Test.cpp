@@ -11,5 +11,6 @@ void Base64Test::base64EncodeTest()
     QVERIFY(decoded == data);
 }
 
-
+//Base64Test t;
+//QTest::qExec(&t);
 

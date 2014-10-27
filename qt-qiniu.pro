@@ -7,7 +7,7 @@ QT       += core gui testlib
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = app
-TARGET = niutan
+TARGET = qt-qiniu
 INCLUDEPATH += . ui qiniu test
 
 # Input
@@ -36,5 +36,3 @@ SOURCES += main.cpp \
            qiniu/QNUtils.cpp \
            test/Base64Test.cpp \
            ui/QNMainWindow.cpp
-
-
