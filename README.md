@@ -1,2 +1,2 @@
-niutan
+qt-qiniu
 ======
