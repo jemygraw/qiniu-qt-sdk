@@ -18,16 +18,6 @@ QNMac::~QNMac()
 
 }
 
-bool QNMac::isNull() const
-{
-    bool isnull=false;
-    if(this->accessKey.isEmpty() || this->secretKey.isNull())
-    {
-        isnull=true;
-    }
-    return isnull;
-}
-
 // Sign data
 // Mainly used to create the private bucket download token
 

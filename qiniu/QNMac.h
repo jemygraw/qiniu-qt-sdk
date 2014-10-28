@@ -17,7 +17,6 @@ public:
     QNMac();
     QNMac(QString &accessKey, QByteArray &secretKey);
     ~QNMac();
-    bool isNull() const;
     QString sign(const QByteArray &data) const;
     QString signWithData(const QByteArray &data) const;
     QString signRequest(const QNetworkRequest &request, const QByteArray *bodyData=NULL) const;
