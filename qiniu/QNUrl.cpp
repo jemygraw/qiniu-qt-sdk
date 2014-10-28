@@ -50,14 +50,7 @@ QString QNUrl::makePrivateSimpleUrl(const QString &domain, const QString &key,
             finalUrl.append("?").append(*fop);
         }
     }
-
-    QDateTime now=QDateTime::currentDateTime();
-    //qiniu server timezone is utc+8
-    now.setOffsetFromUtc(3600*8);
-    //default time span is one hour
-    now=now.addSecs(3600);
-
-    uint expireTimestamp=now.toTime_t();
+    uint expireTimestamp=QNUtils::expireInSeconds(3600);
     if(deadline!=NULL && !deadline->isNull())
     {
         expireTimestamp=(*deadline).toTime_t();

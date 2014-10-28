@@ -29,7 +29,10 @@ HEADERS += qiniu/QNAuthDigest.h \
     qiniu/QNPutPolicy.h \
     qiniu/QNUrl.h \
     test/QNUrlTest.h \
-    test/QNETagTest.h
+    test/QNETagTest.h \
+    qiniu/QNError.h \
+    test/QNPutPolicyTest.h \
+    qiniu/QNPutExtra.h
 SOURCES += main.cpp \
            qiniu/QNAuthDigest.cpp \
            qiniu/QNConf.cpp \
@@ -49,4 +52,7 @@ SOURCES += main.cpp \
     qiniu/QNPutPolicy.cpp \
     qiniu/QNUrl.cpp \
     test/QNUrlTest.cpp \
-    test/QNETagTest.cpp
+    test/QNETagTest.cpp \
+    qiniu/QNError.cpp \
+    test/QNPutPolicyTest.cpp \
+    qiniu/QNPutExtra.cpp
