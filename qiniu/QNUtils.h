@@ -1,5 +1,6 @@
 #ifndef QNUTILS_H
 #define QNUTILS_H
+#include <QtGlobal>
 
 class QString;
 class QByteArray;
@@ -16,6 +17,8 @@ public:
     static QByteArray sha1(const QByteArray &data);
     static QByteArray hmacSha1(const QByteArray &data, const QByteArray &secretKey);
     static QString escapeKey(const QString &key);
+    static bool isParamValid(const QString *param);
+    static uint expireInSeconds(const uint seconds);
 };
 
 #endif // QNUTILS_H

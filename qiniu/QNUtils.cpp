@@ -3,7 +3,7 @@
 #include <QString>
 #include <QCryptographicHash>
 #include <QUrl>
-
+#include <QDateTime>
 
 const char QNUtils::KEY_ESCAPE_UNRESERVE_BYTES[] = {'!', '*', '\'', '(', ')', ';', ':', '@',
                                                     '&', '=', '+', '$', ',', '/', '#', '[', ']' };
@@ -71,5 +71,23 @@ QByteArray QNUtils::hmacSha1(const QByteArray &data, const QByteArray &secretKey
 // @see http://en.wikipedia.org/wiki/Percent-encoding
 QString QNUtils::escapeKey(const QString &key)
 {
-    return QUrl::toPercentEncoding(key,QNUtils::KEY_ESCAPE_UNRESERVE_BYTES,QNUtils::KEY_ESCAPE_RESERVE_BYTES);
+    return QUrl::toPercentEncoding(key,QNUtils::KEY_ESCAPE_UNRESERVE_BYTES,
+                                   QNUtils::KEY_ESCAPE_RESERVE_BYTES);
+}
+
+// Check QString not null and not empty
+bool QNUtils::isParamValid(const QString *param)
+{
+    return (param!=NULL && !param->isEmpty());
+}
+
+// A quick way to get a deadline timestamp
+uint QNUtils::expireInSeconds(const uint seconds)
+{
+    QDateTime now=QDateTime::currentDateTime();
+    //qiniu server timezone is utc+8
+    now.setOffsetFromUtc(3600*8);
+    //default time span is one hour
+    now=now.addSecs(seconds);
+    return now.toTime_t();
 }
