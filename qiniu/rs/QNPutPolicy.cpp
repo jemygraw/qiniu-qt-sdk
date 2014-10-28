@@ -1,11 +1,11 @@
 #include "QNPutPolicy.h"
-#include "QNUtils.h"
+#include "qiniu/utils/QNUtils.h"
 #include <QString>
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QByteArray>
-#include <QNMac.h>
-#include <QNConf.h>
+#include "qiniu/auth/QNMac.h"
+#include "qiniu/conf/QNConf.h"
 
 QNPutPolicy::QNPutPolicy(QString &scope):scope(scope)
 {

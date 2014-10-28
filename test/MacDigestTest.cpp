@@ -1,7 +1,7 @@
 #include "MacDigestTest.h"
 #include <QString>
 #include <QByteArray>
-#include "QNMac.h"
+#include "qiniu/auth/QNMac.h"
 #include <iostream>
 
 void MacDigestTest::macDigestTest()

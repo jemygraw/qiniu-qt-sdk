@@ -1,5 +1,5 @@
 #include "QNETagTest.h"
-#include "QNETag.h"
+#include "qiniu/utils/QNETag.h"
 #include <iostream>
 
 void QNETagTest::fileETagTest()

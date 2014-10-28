@@ -1,7 +1,7 @@
 #include "QNUrlTest.h"
-#include "QNUrl.h"
+#include "qiniu/utils/QNUrl.h"
 #include <iostream>
-#include "QNMac.h"
+#include "qiniu/auth/QNMac.h"
 
 void QNUrlTest::publicUrlTest()
 {

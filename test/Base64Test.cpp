@@ -1,5 +1,5 @@
 #include "test/Base64Test.h"
-#include "qiniu/QNUtils.h"
+#include "qiniu/utils/QNUtils.h"
 #include <QByteArray>
 #include <QtTest/QtTest>
 

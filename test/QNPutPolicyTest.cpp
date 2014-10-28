@@ -1,8 +1,8 @@
 #include "QNPutPolicyTest.h"
-#include "QNPutPolicy.h"
-#include "QNPutRet.h"
-#include "QNUtils.h"
-#include "QNMac.h"
+#include "qiniu/rs/QNPutPolicy.h"
+#include "qiniu/rs/QNPutRet.h"
+#include "qiniu/utils/QNUtils.h"
+#include "qiniu/auth/QNMac.h"
 #include <QString>
 #include <iostream>
 

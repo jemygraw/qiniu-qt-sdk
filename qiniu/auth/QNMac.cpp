@@ -1,5 +1,5 @@
 #include "QNMac.h"
-#include "QNUtils.h"
+#include "qiniu/utils/QNUtils.h"
 #include <QString>
 #include <QByteArray>
 #include <QtNetwork/QNetworkRequest>

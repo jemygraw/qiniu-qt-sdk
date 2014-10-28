@@ -1,7 +1,7 @@
 #include "QNUrl.h"
 #include "QNUtils.h"
-#include "QNConf.h"
-#include "QNMac.h"
+#include "qiniu/conf/QNConf.h"
+#include "qiniu/auth/QNMac.h"
 #include <QString>
 #include <QDateTime>
 

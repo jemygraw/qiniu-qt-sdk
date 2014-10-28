@@ -1,6 +1,7 @@
 #ifndef QNCONF_H
 #define QNCONF_H
 
+class QObject;
 class QString;
 class QByteArray;
 

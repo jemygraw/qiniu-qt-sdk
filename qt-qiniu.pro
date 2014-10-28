@@ -12,48 +12,47 @@ INCLUDEPATH += . ui qiniu test
 
 # Input
 HEADERS += \
-           qiniu/QNConf.h \
-           qiniu/QNETag.h \
-           qiniu/QNFop.h \
-           qiniu/QNHttp.h \
-           qiniu/QNIO.h \
-           qiniu/QNResumableIO.h \
-           qiniu/QNRS.h \
-           qiniu/QNRSF.h \
-           qiniu/QNRSUtils.h \
-           qiniu/QNUtils.h \
-           test/Base64Test.h \
-           ui/QNMainWindow.h \
-    qiniu/QNMac.h \
-    test/MacDigestTest.h \
-    qiniu/QNPutPolicy.h \
-    qiniu/QNUrl.h \
-    test/QNUrlTest.h \
-    test/QNETagTest.h \
-    qiniu/QNError.h \
-    test/QNPutPolicyTest.h \
-    qiniu/QNPutExtra.h \
-    qiniu/QNPutRet.h
+        qiniu/auth/QNMac.h \
+        qiniu/conf/QNConf.h \
+        qiniu/err/QNError.h \
+        qiniu/fop/QNFop.h \
+        qiniu/io/QNIO.h \
+        qiniu/resumable_io/QNResumableIO.h \
+        qiniu/rs/QNRS.h \
+        qiniu/rs/QNPutPolicy.h \
+        qiniu/rs/QNPutExtra.h \
+        qiniu/rs/QNPutRet.h \
+        qiniu/rsf/QNRSF.h \
+        qiniu/utils/QNETag.h \
+        qiniu/utils/QNUtils.h \
+        qiniu/utils/QNUrl.h \
+        test/Base64Test.h \
+        test/MacDigestTest.h \
+        test/QNUrlTest.h \
+        test/QNETagTest.h \
+        test/QNPutPolicyTest.h \
+        ui/QNMainWindow.h \
+
 SOURCES += main.cpp \
-           qiniu/QNConf.cpp \
-           qiniu/QNEtag.cpp \
-           qiniu/QNFop.cpp \
-           qiniu/QNHttp.cpp \
-           qiniu/QNIO.cpp \
-           qiniu/QNResumableIO.cpp \
-           qiniu/QNRS.cpp \
-           qiniu/QNRSF.cpp \
-           qiniu/QNRSUtils.cpp \
-           qiniu/QNUtils.cpp \
-           test/Base64Test.cpp \
-           ui/QNMainWindow.cpp \
-    qiniu/QNMac.cpp \
-    test/MacDigestTest.cpp \
-    qiniu/QNPutPolicy.cpp \
-    qiniu/QNUrl.cpp \
-    test/QNUrlTest.cpp \
-    test/QNETagTest.cpp \
-    qiniu/QNError.cpp \
-    test/QNPutPolicyTest.cpp \
-    qiniu/QNPutExtra.cpp \
-    qiniu/QNPutRet.cpp
+        qiniu/auth/QNMac.cpp \
+        qiniu/conf/QNConf.cpp \
+        qiniu/err/QNError.cpp \
+        qiniu/fop/QNFop.cpp \
+        qiniu/io/QNIO.cpp \
+        qiniu/resumable_io/QNResumableIO.cpp \
+        qiniu/rs/QNRS.cpp \
+        qiniu/rs/QNPutPolicy.cpp \
+        qiniu/rs/QNPutExtra.cpp \
+        qiniu/rs/QNPutRet.cpp \
+        qiniu/rsf/QNRSF.cpp \
+        qiniu/utils/QNUtils.cpp \
+        qiniu/utils/QNEtag.cpp \
+        qiniu/utils/QNUrl.cpp \
+        test/Base64Test.cpp \
+        test/MacDigestTest.cpp \
+        test/QNUrlTest.cpp \
+        test/QNETagTest.cpp \
+        test/QNPutPolicyTest.cpp \
+        ui/QNMainWindow.cpp \
+
+
