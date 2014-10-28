@@ -1,6 +1,7 @@
 #include "test/Base64Test.h"
 #include "qiniu/QNUtils.h"
 #include <QByteArray>
+#include <QtTest/QtTest>
 
 void Base64Test::base64EncodeTest()
 {
@@ -11,6 +12,6 @@ void Base64Test::base64EncodeTest()
     QVERIFY(decoded == data);
 }
 
-//Base64Test t;
-//QTest::qExec(&t);
+// Base64Test t;
+// QTest::qExec(&t);
 
