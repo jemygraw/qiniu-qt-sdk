@@ -8,6 +8,7 @@ class QNPutPolicyTest : public QObject
 private slots:
     void putPolicyTest1();
     void putRetTest1();
+    void makeUploadTokenTest();
 };
 
 #endif // QNPUTPOLICYTEST_H

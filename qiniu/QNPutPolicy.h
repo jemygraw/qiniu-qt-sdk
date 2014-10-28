@@ -4,6 +4,7 @@
 #include <QtGlobal>
 
 class QString;
+class QNMac;
 
 //@see http://developer.qiniu.com/docs/v6/api/reference/security/put-policy.html
 class QNPutPolicy
@@ -18,7 +19,15 @@ private:
 
     qint64 fSizeLimit;  //optional
 
-    quint16 detectMime; //optional, default 0
+    //let qiniu server dectect file mime type
+    //1. check file name extension
+    //2. check key extension
+    //3. check file content
+    //default is 0, auto use the specified mimetype
+    //or check by step 1,2,3
+    //if the server cannot figure out the mimetype,
+    //use application/octet-stream
+    qint16 detectMime; //optional, default 0
     QString *mimeLimit; //optional
 
     QString *callbackUrl;   //optional
@@ -35,7 +44,8 @@ private:
 
 public:
     QNPutPolicy(QString &scope);
-    QString toJSON(bool compact=true);
+    QByteArray toJSON(bool compact=true);
+    QString makeUploadToken(const QNMac *mac=NULL);
 
     //getters & setters
     QString getScope() const;
@@ -57,8 +67,8 @@ public:
     qint64 getFSizeLimit() const;
     void setFSizeLimit(const qint64 &value);
 
-    quint16 getDetectMime() const;
-    void setDetectMime(const quint16 &value);
+    qint16 getDetectMime() const;
+    void setDetectMime(const qint16 &value);
 
     QString *getMimeLimit() const;
     void setMimeLimit(QString *value);

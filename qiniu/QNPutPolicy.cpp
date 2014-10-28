@@ -4,11 +4,15 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QByteArray>
-#include <iostream>
+#include <QNMac.h>
+#include <QNConf.h>
 
 QNPutPolicy::QNPutPolicy(QString &scope):scope(scope)
 {
-    detectMime=0;
+    //default is 1970/1/1, timestamp is 0
+    deadline=0;
+
+    detectMime=-1;
     fSizeLimit=-1;
     insertOnly=-1;
 
@@ -25,7 +29,7 @@ QNPutPolicy::QNPutPolicy(QString &scope):scope(scope)
     this->persistentPipeline=NULL;
 }
 
-QString QNPutPolicy::toJSON(bool compact)
+QByteArray QNPutPolicy::toJSON(bool compact)
 {
     QJsonObject json=QJsonObject();
     json["scope"]=scope;
@@ -39,7 +43,7 @@ QString QNPutPolicy::toJSON(bool compact)
     {
         json["fSizeLimit"]=fSizeLimit;
     }
-    if(detectMime!=0)
+    if(detectMime!=-1)
     {
         json["detectMime"]=detectMime;
     }
@@ -99,7 +103,28 @@ QString QNPutPolicy::toJSON(bool compact)
         f=QJsonDocument::Indented;
     }
     QByteArray data=doc.toJson(f);
-    return QString(data);
+    return data;
+}
+
+QString QNPutPolicy::makeUploadToken(const QNMac *mac)
+{
+    // check whether deadline set, otherwise default is one hour
+    if(this->deadline==0)
+    {
+        this->deadline=QNUtils::expireInSeconds(3600);
+    }
+    QByteArray putPolicyJson=this->toJSON();
+    QString uploadToken;
+    if(mac!=NULL)
+    {
+        uploadToken=mac->signWithData(putPolicyJson);
+    }
+    else
+    {
+        QNMac macx=QNMac(QNConf::ACCESS_KEY,QNConf::SECRET_KEY);
+        uploadToken=macx.signWithData(putPolicyJson);
+    }
+    return uploadToken;
 }
 
 qint32 QNPutPolicy::getDeadline() const
@@ -162,12 +187,12 @@ void QNPutPolicy::setFSizeLimit(const qint64 &value)
     fSizeLimit = value;
 }
 
-quint16 QNPutPolicy::getDetectMime() const
+qint16 QNPutPolicy::getDetectMime() const
 {
     return detectMime;
 }
 
-void QNPutPolicy::setDetectMime(const quint16 &value)
+void QNPutPolicy::setDetectMime(const qint16 &value)
 {
     detectMime = value;
 }

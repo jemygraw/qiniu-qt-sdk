@@ -11,7 +11,7 @@ TARGET = qt-qiniu
 INCLUDEPATH += . ui qiniu test
 
 # Input
-HEADERS += qiniu/QNAuthDigest.h \
+HEADERS += \
            qiniu/QNConf.h \
            qiniu/QNETag.h \
            qiniu/QNFop.h \
@@ -32,9 +32,9 @@ HEADERS += qiniu/QNAuthDigest.h \
     test/QNETagTest.h \
     qiniu/QNError.h \
     test/QNPutPolicyTest.h \
-    qiniu/QNPutExtra.h
+    qiniu/QNPutExtra.h \
+    qiniu/QNPutRet.h
 SOURCES += main.cpp \
-           qiniu/QNAuthDigest.cpp \
            qiniu/QNConf.cpp \
            qiniu/QNEtag.cpp \
            qiniu/QNFop.cpp \
@@ -55,4 +55,5 @@ SOURCES += main.cpp \
     test/QNETagTest.cpp \
     qiniu/QNError.cpp \
     test/QNPutPolicyTest.cpp \
-    qiniu/QNPutExtra.cpp
+    qiniu/QNPutExtra.cpp \
+    qiniu/QNPutRet.cpp
