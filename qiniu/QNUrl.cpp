@@ -4,40 +4,31 @@
 #include "QNMac.h"
 #include <QString>
 #include <QDateTime>
-#include <QDebug>
-#include <iostream>
 
-QNUrl::QNUrl(QString *styleDelimiter)
+QNUrl::QNUrl():styleDelimiter(QNConf::DEFAULT_STYLE_DELIMITER)
 {
-    if (styleDelimiter!=NULL)
-    {
-        this->styleDelimiter = styleDelimiter;
-    }
-    else
-    {
-        this->styleDelimiter = new QString(QNConf::DEFAULT_STYLE_DELIMITER);
-    }
+
+}
+
+QNUrl::QNUrl(QString &styleDelimiter):styleDelimiter(styleDelimiter)
+{
 }
 
 QNUrl::~QNUrl()
 {
-    if (this->styleDelimiter!=NULL)
-    {
-        delete this->styleDelimiter;
-    }
 }
 
 
-QString QNUrl::makePublicSimpleUrl(QString *domain, QString *key,
-                                   QString *fop=NULL, bool isAlias=false)
+QString QNUrl::makePublicSimpleUrl(const QString &domain, const QString &key,
+                                   const QString *fop, const bool isAlias)
 {
-    QString finalUrl=QString(*domain);
+    QString finalUrl=QString(domain);
     finalUrl.append("/");
-    finalUrl.append(QNUtils::escapeKey(*key));
+    finalUrl.append(QNUtils::escapeKey(key));
 
-    if (fop!=NULL){
+    if (fop!=NULL &&fop->isEmpty()){
         if (isAlias){
-            finalUrl.append(*(this->styleDelimiter)).append(*fop);
+            finalUrl.append(this->styleDelimiter).append(*fop);
         }else{
             finalUrl.append("?").append(*fop);
         }
@@ -45,31 +36,31 @@ QString QNUrl::makePublicSimpleUrl(QString *domain, QString *key,
     return finalUrl;
 }
 
-QString QNUrl::makePrivateSimpleUrl(QString *domain, QString *key, QNMac *mac=NULL, QDateTime *deadline=NULL,
-                                    QString *fop=NULL, bool isAlias=false)
+QString QNUrl::makePrivateSimpleUrl(const QString &domain, const QString &key,
+                                    const QString *fop, const bool isAlias,
+                                    const QDateTime *deadline, const QNMac *mac)
 {
-    QString finalUrl=QString(*domain);
+    QString finalUrl=QString(domain);
     finalUrl.append("/");
-    finalUrl.append(QNUtils::escapeKey(*key));
-    if (fop!=NULL){
+    finalUrl.append(QNUtils::escapeKey(key));
+    if (fop!=NULL && !fop->isEmpty()){
         if (isAlias){
-            finalUrl.append(*(this->styleDelimiter)).append(*fop);
+            finalUrl.append(this->styleDelimiter).append(*fop);
         }else{
             finalUrl.append("?").append(*fop);
         }
     }
 
     QDateTime now=QDateTime::currentDateTime();
+    //qiniu server timezone is utc+8
     now.setOffsetFromUtc(3600*8);
     //default time span is one hour
-    std::cout<<now.toString().toStdString()<<std::endl;
     now=now.addSecs(3600);
-    std::cout<<now.toString().toStdString()<<std::endl;
 
     uint expireTimestamp=now.toTime_t();
-    if(deadline!=NULL)
+    if(deadline!=NULL && !deadline->isNull())
     {
-        expireTimestamp=(*deadline).toTime_t()/1000;
+        expireTimestamp=(*deadline).toTime_t();
     }
     if(finalUrl.contains("?"))
     {
@@ -79,16 +70,18 @@ QString QNUrl::makePrivateSimpleUrl(QString *domain, QString *key, QNMac *mac=NU
     {
         finalUrl.append("?e=").append(QString::number(expireTimestamp));
     }
-
-    if(mac==NULL)
-    {
-        QString accessKey=QNConf::ACCESS_KEY;
-        QByteArray secretKey=QNConf::SECRET_KEY;
-        QNMac mac1=QNMac(&accessKey,&secretKey);
-        mac=&mac1;
-    }
     QByteArray finalUrlData=finalUrl.toLocal8Bit();
-    QString token=mac->sign(&finalUrlData);
+    QString token;
+    if (mac!=NULL)
+    {
+        token=mac->sign(finalUrlData);
+    }
+    else
+    {
+        QNMac macx=QNMac(QNConf::ACCESS_KEY,QNConf::SECRET_KEY);
+        token=macx.sign(finalUrlData);
+    }
+
     finalUrl.append("&token=").append(token);
     return finalUrl;
 }

@@ -20,21 +20,21 @@ QNUtils::~QNUtils()
 }
 
 // Url safe base64 encode
-QString QNUtils::urlSafeBase64Encode(QByteArray data)
+QString QNUtils::urlSafeBase64Encode(const QByteArray &data)
 {
     QByteArray encodedData = data.toBase64(QByteArray::Base64UrlEncoding);
     return QString(encodedData);
 }
 
 // Url safe base64 decode
-QByteArray QNUtils::urlSafeBase64Decode(QString data)
+QByteArray QNUtils::urlSafeBase64Decode(const QString &data)
 {
     QByteArray bytesToDecode=QByteArray(data.toLocal8Bit());
     return QByteArray::fromBase64(bytesToDecode);
 }
 
 // Sha1 hash
-QByteArray QNUtils::sha1(QByteArray data)
+QByteArray QNUtils::sha1(const QByteArray &data)
 {
     QCryptographicHash sha1Hash(QCryptographicHash::Sha1);
     sha1Hash.addData(data);
@@ -42,11 +42,12 @@ QByteArray QNUtils::sha1(QByteArray data)
 }
 
 // Hmac sha1 hash using secret key
-QByteArray QNUtils::hmacSha1(QByteArray data, QByteArray secretKey)
+QByteArray QNUtils::hmacSha1(const QByteArray &data, const QByteArray &secretKey)
 {
     int blockSize = 64;
-    if (secretKey.length() > blockSize) {
-        secretKey = QCryptographicHash::hash(secretKey, QCryptographicHash::Sha1);
+    QByteArray newSecretKey=QByteArray(secretKey);
+    if (newSecretKey.length() > blockSize) {
+        newSecretKey = QCryptographicHash::hash(newSecretKey, QCryptographicHash::Sha1);
     }
 
     QByteArray innerPadding(blockSize, char(0x36));
@@ -68,7 +69,7 @@ QByteArray QNUtils::hmacSha1(QByteArray data, QByteArray secretKey)
 // Url escaped key
 // @see http://kb.qiniu.com/52slk76w
 // @see http://en.wikipedia.org/wiki/Percent-encoding
-QString QNUtils::escapeKey(QString key)
+QString QNUtils::escapeKey(const QString &key)
 {
     return QUrl::toPercentEncoding(key,QNUtils::KEY_ESCAPE_UNRESERVE_BYTES,QNUtils::KEY_ESCAPE_RESERVE_BYTES);
 }

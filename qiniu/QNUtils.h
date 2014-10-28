@@ -11,11 +11,11 @@ public:
     ~QNUtils();
     static const char KEY_ESCAPE_RESERVE_BYTES[];
     static const char KEY_ESCAPE_UNRESERVE_BYTES[];
-    static QString urlSafeBase64Encode(QByteArray data);
-    static QByteArray urlSafeBase64Decode(QString data);
-    static QByteArray sha1(QByteArray data);
-    static QByteArray hmacSha1(QByteArray data, QByteArray secretKey);
-    static QString escapeKey(QString key);
+    static QString urlSafeBase64Encode(const QByteArray &data);
+    static QByteArray urlSafeBase64Decode(const QString &data);
+    static QByteArray sha1(const QByteArray &data);
+    static QByteArray hmacSha1(const QByteArray &data, const QByteArray &secretKey);
+    static QString escapeKey(const QString &key);
 };
 
 #endif // QNUTILS_H

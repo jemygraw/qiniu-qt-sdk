@@ -25,13 +25,13 @@ QNETag::~QNETag()
 // join them together to get a large data chunk and then sign it using sha1.
 // Prepend 0x96 to the signed data and return the url safe base64 encoded string
 // of the signed data.
-QString QNETag::calcETag(QString *fileName)
+QString QNETag::calcETag(const QString &fileName) const
 {
     QString etag = "";
-    QFileInfo fi(*fileName);
+    QFileInfo fi(fileName);
     if(fi.exists() && fi.permission(QFile::ReadUser))
     {
-        QFile fh(*fileName);
+        QFile fh(fileName);
         bool opened = fh.open(QIODevice::ReadOnly);
         if (opened){
             qint64 fileLen = fh.size();

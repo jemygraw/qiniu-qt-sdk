@@ -10,7 +10,7 @@ private:
 public:
     QNETag();
     ~QNETag();
-    QString calcETag(QString *fileName);
+    QString calcETag(const QString &fileName) const;
 };
 
 #endif // QNETAG_H
