@@ -1,25 +1,25 @@
 #ifndef QNMAC_H
 #define QNMAC_H
-#include <QObject>
+
+#include <QtGlobal>
 
 class QString;
 class QByteArray;
 class QNetworkRequest;
 
-class QNMac : public QObject
+class QNMac
 {
-    Q_OBJECT
-
 private:
-    QString *accessKey;
-    QByteArray *secretKey;
+    QString &accessKey;
+    QByteArray &secretKey;
 
 public:
-    QNMac(QString *accessKey, QByteArray *secretKey, QObject *parent=0);
+    QNMac();
+    QNMac(QString &accessKey, QByteArray &secretKey);
     ~QNMac();
     QString sign(const QByteArray &data) const;
     QString signWithData(const QByteArray &data) const;
-    QString signRequest(const QNetworkRequest &request, const QByteArray *bodyData=0) const;
+    QString signRequest(const QNetworkRequest &request, const QByteArray *bodyData=NULL) const;
 };
 
 #endif // QNMAC_H

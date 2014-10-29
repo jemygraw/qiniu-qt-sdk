@@ -121,8 +121,8 @@ QString QNPutPolicy::makeUploadToken(const QNMac *mac)
     }
     else
     {
-        QNMac *macx= new QNMac(&QNConf::ACCESS_KEY,&QNConf::SECRET_KEY);
-        uploadToken=macx->signWithData(putPolicyJson);
+        QNMac macx=QNMac(QNConf::ACCESS_KEY,QNConf::SECRET_KEY);
+        uploadToken=macx.signWithData(putPolicyJson);
     }
     return uploadToken;
 }

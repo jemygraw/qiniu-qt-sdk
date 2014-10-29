@@ -71,8 +71,8 @@ QString QNUrl::makePrivateSimpleUrl(const QString &domain, const QString &key,
     }
     else
     {
-        QNMac *macx= new QNMac(&QNConf::ACCESS_KEY,&QNConf::SECRET_KEY);
-        token=macx->sign(finalUrlData);
+        QNMac macx=QNMac(QNConf::ACCESS_KEY,QNConf::SECRET_KEY);
+        token=macx.sign(finalUrlData);
     }
 
     finalUrl.append("&token=").append(token);

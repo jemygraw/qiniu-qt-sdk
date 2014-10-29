@@ -42,8 +42,8 @@ void QNPutPolicyTest::makeUploadTokenTest()
     QString accessKey="pObK-5uirmOAtYGM705oxIco1m9xlqwONnYyLOoI";
     QString secretKey="wXIqwPbClstEew5vibPkUJPv-bJojiVe4aapNmYJ";
     QByteArray secretBytes=secretKey.toLocal8Bit();
-    QNMac *mac=new QNMac(&accessKey,&secretBytes);
-    QString uploadToken=policy.makeUploadToken(mac);
+    QNMac mac=QNMac(accessKey,secretBytes);
+    QString uploadToken=policy.makeUploadToken(&mac);
     std::cout<<uploadToken.toStdString()<<std::endl;
     std::cout<<std::endl<<std::endl;
 }
