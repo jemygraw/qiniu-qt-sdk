@@ -14,7 +14,6 @@ private:
     QByteArray &secretKey;
 
 public:
-    QNMac();
     QNMac(QString &accessKey, QByteArray &secretKey);
     ~QNMac();
     QString sign(const QByteArray &data) const;
