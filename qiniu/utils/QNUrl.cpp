@@ -26,7 +26,7 @@ QString QNUrl::makePublicSimpleUrl(const QString &domain, const QString &key,
     finalUrl.append("/");
     finalUrl.append(QNUtils::escapeKey(key));
 
-    if (fop!=NULL &&fop->isEmpty()){
+    if (fop!=0 &&fop->isEmpty()){
         if (isAlias){
             finalUrl.append(this->styleDelimiter).append(*fop);
         }else{
@@ -43,7 +43,7 @@ QString QNUrl::makePrivateSimpleUrl(const QString &domain, const QString &key,
     QString finalUrl=QString(domain);
     finalUrl.append("/");
     finalUrl.append(QNUtils::escapeKey(key));
-    if (fop!=NULL && !fop->isEmpty()){
+    if (fop!=0 && !fop->isEmpty()){
         if (isAlias){
             finalUrl.append(this->styleDelimiter).append(*fop);
         }else{
@@ -51,7 +51,7 @@ QString QNUrl::makePrivateSimpleUrl(const QString &domain, const QString &key,
         }
     }
     uint expireTimestamp=QNUtils::expireInSeconds(3600);
-    if(deadline!=NULL && !deadline->isNull())
+    if(deadline!=0 && !deadline->isNull())
     {
         expireTimestamp=(*deadline).toTime_t();
     }
@@ -65,7 +65,7 @@ QString QNUrl::makePrivateSimpleUrl(const QString &domain, const QString &key,
     }
     QByteArray finalUrlData=finalUrl.toLocal8Bit();
     QString token;
-    if (mac!=NULL)
+    if (mac!=0)
     {
         token=mac->sign(finalUrlData);
     }
