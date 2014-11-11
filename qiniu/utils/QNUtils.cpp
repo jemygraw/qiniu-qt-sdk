@@ -78,7 +78,7 @@ QString QNUtils::escapeKey(const QString &key)
 // Check QString not null and not empty
 bool QNUtils::isParamValid(const QString *param)
 {
-    return (param!=NULL && !param->isEmpty());
+    return (param!=0 && !param->isEmpty());
 }
 
 // A quick way to get a deadline timestamp
@@ -90,4 +90,38 @@ uint QNUtils::expireInSeconds(const uint seconds)
     //default time span is one hour
     now=now.addSecs(seconds);
     return now.toTime_t();
+}
+
+// Calculate the crc32 for data bytes
+uint QNUtils::crc32(const QByteArray &data)
+{
+    QByteArray temp;
+
+    unsigned short crc=0xffff;
+    unsigned short a,j,k;
+
+    for(a=0; a<data.size(); a++)
+    {
+        crc =crc ^ ( (int)data[a]>=0 ? data[a] : (data[a]+256) );
+        for(j=0;j<8;j++)
+        {
+            k=crc & 01;
+            crc=crc >> 1;
+            if (k==0) continue;
+            crc =crc ^ 0xA001;
+        }
+    }
+    temp[1] = crc/256;
+    temp[0] = crc%256;
+    return temp.toUInt();
+}
+
+// Create a random file name
+QString QNUtils::randomFileName()
+{
+    QDateTime now=QDateTime::currentDateTime();
+    now.setOffsetFromUtc(3600*8);
+    QString randFileName("Qiniu_Random_File_");
+    randFileName.append(now.toTime_t());
+    return randFileName;
 }

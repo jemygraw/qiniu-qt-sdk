@@ -19,6 +19,8 @@ public:
     static QString escapeKey(const QString &key);
     static bool isParamValid(const QString *param);
     static uint expireInSeconds(const uint seconds);
+    static uint crc32(const QByteArray &data);
+    static QString randomFileName();
 };
 
 #endif // QNUTILS_H
