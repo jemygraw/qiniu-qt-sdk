@@ -11,6 +11,7 @@
 
 QNCreateSaveAsTokenWidget::QNCreateSaveAsTokenWidget(QWidget *parent): QWidget(parent)
 {
+    this->setWindowTitle(tr("Create Saveas Token"));
     createLayout();
 }
 

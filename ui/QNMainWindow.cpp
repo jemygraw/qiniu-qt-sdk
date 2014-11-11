@@ -1,6 +1,7 @@
 #include "QNMainWindow.h"
 #include "QNSimpleUploadDataWidget.h"
 #include "QNCreateSaveAsTokenWidget.h"
+#include "QNUrlBase64Widget.h"
 #include <QNetworkAccessManager>
 #include <QAction>
 #include <QMenu>
@@ -45,9 +46,12 @@ void QNMainWindow::createMenus()
 
     //tool menu
     createSaveAsTokenAction=new QAction(tr("Create SaveAs Token"),this);
+    base64Action=new QAction(tr("Urlsafe Base64 Encode/Decode"),this);
     QMenu *toolMenu=menuBar()->addMenu(tr("Tools"));
+    toolMenu->addAction(base64Action);
     toolMenu->addAction(createSaveAsTokenAction);
 
+    connect(base64Action,SIGNAL(triggered()),this,SLOT(base64Slot()));
     connect(createSaveAsTokenAction,SIGNAL(triggered()),this,SLOT(createSaveAsTokenSlot()));
 
 
@@ -58,12 +62,10 @@ void QNMainWindow::createMenus()
 
 void QNMainWindow::createWidgets()
 {
-    mainStackedWidget=new QStackedWidget;
-    setCentralWidget(mainStackedWidget);
-
     //init
     simpleUploadDataWidget=0;
     createSaveAsTokenWidget=0;
+    urlBase64Widget=0;
 }
 
 QNMainWindow::~QNMainWindow()
@@ -76,10 +78,8 @@ void QNMainWindow::simpleUploadDataSlot()
     if (simpleUploadDataWidget==0)
     {
         simpleUploadDataWidget=new QNSimpleUploadDataWidget(networkManager);
-        mainStackedWidget->addWidget(simpleUploadDataWidget);
     }
-    mainStackedWidget->setCurrentWidget(simpleUploadDataWidget);
-    this->adjustSize();
+    this->simpleUploadDataWidget->show();
 }
 
 void QNMainWindow::createSaveAsTokenSlot()
@@ -87,8 +87,15 @@ void QNMainWindow::createSaveAsTokenSlot()
     if(createSaveAsTokenWidget==0)
     {
         createSaveAsTokenWidget=new QNCreateSaveAsTokenWidget();
-        mainStackedWidget->addWidget(createSaveAsTokenWidget);
     }
-    mainStackedWidget->setCurrentWidget(createSaveAsTokenWidget);
-    this->adjustSize();
+    this->createSaveAsTokenWidget->show();
+}
+
+void QNMainWindow::base64Slot()
+{
+    if(urlBase64Widget==0)
+    {
+        urlBase64Widget=new QNUrlBase64Widget();
+    }
+    this->urlBase64Widget->show();
 }

@@ -7,6 +7,7 @@ class QStackedWidget;
 class QNetworkAccessManager;
 class QNSimpleUploadDataWidget;
 class QNCreateSaveAsTokenWidget;
+class QNUrlBase64Widget;
 
 class QNMainWindow : public QMainWindow
 {
@@ -16,11 +17,13 @@ private:
     QAction *aboutAction;
     QAction *aboutQtAction;
     QAction *quitAction;
+
+    //tool menu
     QAction *createSaveAsTokenAction;
+    QAction *base64Action;
 
     //upload menu
     QAction *simpleUploadDataAction;
-
     QAction *simpleUploadNoKeyAction;
     QAction *simpleUploadWithKeyAction;
 
@@ -31,9 +34,8 @@ private:
     //objects
     QNSimpleUploadDataWidget *simpleUploadDataWidget;
     QNCreateSaveAsTokenWidget *createSaveAsTokenWidget;
+    QNUrlBase64Widget *urlBase64Widget;
 
-    //
-    QStackedWidget *mainStackedWidget;
 public:
     QNetworkAccessManager *networkManager;
 
@@ -44,6 +46,7 @@ public:
 public slots:
     void simpleUploadDataSlot();
     void createSaveAsTokenSlot();
+    void base64Slot();
 };
 
 #endif // QNMAINWINDOW_H

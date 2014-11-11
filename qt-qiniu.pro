@@ -33,7 +33,8 @@ HEADERS += \
         test/QNPutPolicyTest.h \
         ui/QNMainWindow.h \
     ui/QNSimpleUploadDataWidget.h \
-    ui/QNCreateSaveAsTokenWidget.h
+    ui/QNCreateSaveAsTokenWidget.h \
+    ui/QNUrlBase64Widget.h
 
 
 
@@ -59,7 +60,8 @@ SOURCES += main.cpp \
         test/QNPutPolicyTest.cpp \
         ui/QNMainWindow.cpp \
     ui/QNSimpleUploadDataWidget.cpp \
-    ui/QNCreateSaveAsTokenWidget.cpp
+    ui/QNCreateSaveAsTokenWidget.cpp \
+    ui/QNUrlBase64Widget.cpp
 
 
 
