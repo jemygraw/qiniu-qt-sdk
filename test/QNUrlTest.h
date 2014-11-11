@@ -1,6 +1,5 @@
 #ifndef QNURLTEST_H
 #define QNURLTEST_H
-
 #include <QObject>
 
 class QNUrlTest : public QObject

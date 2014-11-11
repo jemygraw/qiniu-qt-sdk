@@ -41,7 +41,7 @@ void QNUrlTest::privateUrlTest2()
     QString secretKey="wXIqwPbClstEew5vibPkUJPv-bJojiVe4aapNmYJ";
     QByteArray secretBytes=secretKey.toLocal8Bit();
     QNMac mac=QNMac(accessKey,secretBytes);
-    QString req=url.makePrivateSimpleUrl(domain,key,&fop,isAlias,NULL,&mac);
+    QString req=url.makePrivateSimpleUrl(domain,key,&fop,isAlias,0,&mac);
     std::cout<<req.toStdString()<<std::endl;
 }
 
