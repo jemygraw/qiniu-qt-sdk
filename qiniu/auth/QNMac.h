@@ -18,7 +18,7 @@ public:
     ~QNMac();
     QString sign(const QByteArray &data) const;
     QString signWithData(const QByteArray &data) const;
-    QString signRequest(const QNetworkRequest &request, const QByteArray *bodyData=NULL) const;
+    QString signRequest(const QNetworkRequest &request, const QByteArray *bodyData=0) const;
 };
 
 #endif // QNMAC_H

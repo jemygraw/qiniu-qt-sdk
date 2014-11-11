@@ -71,7 +71,7 @@ QString QNMac::signRequest(const QNetworkRequest &request,const QByteArray *body
     }
     dataToSign.append("\n");
     // check whether with body
-    if (bodyData!=NULL && !bodyData->isEmpty())
+    if (bodyData!=0 && !bodyData->isEmpty())
     {
         dataToSign.append(*bodyData);
     }
