@@ -2,6 +2,7 @@
 #include "QNSimpleUploadDataWidget.h"
 #include "QNCreateSaveAsTokenWidget.h"
 #include "QNUrlBase64Widget.h"
+#include "QNImageView2Widget.h"
 #include <QNetworkAccessManager>
 #include <QAction>
 #include <QMenu>
@@ -20,6 +21,8 @@ QNMainWindow::QNMainWindow(QWidget *parent)
    networkManager=new QNetworkAccessManager(this);
    createMenus();
    createWidgets();
+   this->setMinimumWidth(500);
+   this->setMinimumHeight(200);
 }
 
 void QNMainWindow::createMenus()
@@ -44,6 +47,11 @@ void QNMainWindow::createMenus()
 
     connect(simpleUploadDataAction,SIGNAL(triggered()),this,SLOT(simpleUploadDataSlot()));
 
+    //image menu
+    imageView2Action=new QAction(tr("imageView2"),this);
+    QMenu *imageMenu=new QMenu(tr("Image"),this);
+    imageMenu->addAction(imageView2Action);
+
     //tool menu
     createSaveAsTokenAction=new QAction(tr("Create SaveAs Token"),this);
     base64Action=new QAction(tr("Urlsafe Base64 Encode/Decode"),this);
@@ -51,12 +59,14 @@ void QNMainWindow::createMenus()
     toolMenu->addAction(base64Action);
     toolMenu->addAction(createSaveAsTokenAction);
 
+
     connect(base64Action,SIGNAL(triggered()),this,SLOT(base64Slot()));
     connect(createSaveAsTokenAction,SIGNAL(triggered()),this,SLOT(createSaveAsTokenSlot()));
-
+    connect(imageView2Action,SIGNAL(triggered()),this,SLOT(imageView2Slot()));
 
     menuBar()->addMenu(sysMenu);
     menuBar()->addMenu(uploadMenu);
+    menuBar()->addMenu(imageMenu);
     menuBar()->addMenu(toolMenu);
 }
 
@@ -66,6 +76,7 @@ void QNMainWindow::createWidgets()
     simpleUploadDataWidget=0;
     createSaveAsTokenWidget=0;
     urlBase64Widget=0;
+    imageView2Widget=0;
 }
 
 QNMainWindow::~QNMainWindow()
@@ -98,4 +109,13 @@ void QNMainWindow::base64Slot()
         urlBase64Widget=new QNUrlBase64Widget();
     }
     this->urlBase64Widget->show();
+}
+
+void QNMainWindow::imageView2Slot()
+{
+    if(imageView2Widget==0)
+    {
+        imageView2Widget=new QNImageView2Widget();
+    }
+    this->imageView2Widget->show();
 }

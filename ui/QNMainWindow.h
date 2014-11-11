@@ -8,6 +8,7 @@ class QNetworkAccessManager;
 class QNSimpleUploadDataWidget;
 class QNCreateSaveAsTokenWidget;
 class QNUrlBase64Widget;
+class QNImageView2Widget;
 
 class QNMainWindow : public QMainWindow
 {
@@ -27,6 +28,9 @@ private:
     QAction *simpleUploadNoKeyAction;
     QAction *simpleUploadWithKeyAction;
 
+    //image
+    QAction *imageView2Action;
+
     //methods
     void createMenus();
     void createWidgets();
@@ -35,6 +39,7 @@ private:
     QNSimpleUploadDataWidget *simpleUploadDataWidget;
     QNCreateSaveAsTokenWidget *createSaveAsTokenWidget;
     QNUrlBase64Widget *urlBase64Widget;
+    QNImageView2Widget *imageView2Widget;
 
 public:
     QNetworkAccessManager *networkManager;
@@ -47,6 +52,7 @@ public slots:
     void simpleUploadDataSlot();
     void createSaveAsTokenSlot();
     void base64Slot();
+    void imageView2Slot();
 };
 
 #endif // QNMAINWINDOW_H
