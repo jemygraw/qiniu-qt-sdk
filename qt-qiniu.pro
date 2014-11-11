@@ -7,7 +7,7 @@ QT       += core network gui testlib
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = app
-TARGET = qt-qiniu
+TARGET = "Qiniu Qt SDK"
 INCLUDEPATH += . ui qiniu test
 
 # Input
@@ -16,7 +16,7 @@ HEADERS += \
         qiniu/conf/QNConf.h \
         qiniu/err/QNError.h \
         qiniu/fop/QNFop.h \
-        qiniu/io/QNIO.h \
+        qiniu/io/QNIOHelper.h \
         qiniu/resumable_io/QNResumableIO.h \
         qiniu/rs/QNRS.h \
         qiniu/rs/QNPutPolicy.h \
@@ -32,13 +32,17 @@ HEADERS += \
         test/QNETagTest.h \
         test/QNPutPolicyTest.h \
         ui/QNMainWindow.h \
+    ui/QNSimpleUploadDataWidget.h \
+    ui/QNCreateSaveAsTokenWidget.h
+
+
 
 SOURCES += main.cpp \
         qiniu/auth/QNMac.cpp \
         qiniu/conf/QNConf.cpp \
         qiniu/err/QNError.cpp \
         qiniu/fop/QNFop.cpp \
-        qiniu/io/QNIO.cpp \
+        qiniu/io/QNIOHelper.cpp \
         qiniu/resumable_io/QNResumableIO.cpp \
         qiniu/rs/QNRS.cpp \
         qiniu/rs/QNPutPolicy.cpp \
@@ -54,5 +58,9 @@ SOURCES += main.cpp \
         test/QNETagTest.cpp \
         test/QNPutPolicyTest.cpp \
         ui/QNMainWindow.cpp \
+    ui/QNSimpleUploadDataWidget.cpp \
+    ui/QNCreateSaveAsTokenWidget.cpp
+
+
 
 

@@ -6,11 +6,15 @@
 #include "test/QNETagTest.h"
 #include "test/QNPutPolicyTest.h"
 #include <iostream>
+#include <QApplication>
+#include <QPushButton>
 #include <QDateTime>
+#include <QNetworkAccessManager>
+#include "ui/QNMainWindow.h"
 int main(int argc, char *argv[])
 {
-
-    QNPutPolicyTest t;
-    QTest::qExec(&t);
-    return 0;
+    QApplication app(argc,argv);
+    QNMainWindow *wnd=new QNMainWindow();
+    wnd->show();
+    return app.exec();
 }
