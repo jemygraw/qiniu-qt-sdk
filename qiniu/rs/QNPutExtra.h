@@ -13,6 +13,10 @@ private:
     qint32 crc32;
     qint32 checkCrc32;
 public:
+    static const int NO_CRC32 = 0;
+    static const int AUTO_CRC32 = 1;
+    static const int WITH_CRC32 = 2;
+
     QNPutExtra();
     ~QNPutExtra();
 

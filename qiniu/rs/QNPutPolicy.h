@@ -33,6 +33,7 @@ private:
     QString *callbackUrl;   //optional
     QString *callbackHost;  //optional
     QString *callbackBody;  //optional
+    qint16 callbackFetchKey; //optional
 
     QString *returnUrl;     //optional
     QString *returnBody;    //optional
@@ -45,7 +46,7 @@ private:
 public:
     QNPutPolicy(QString &scope);
     QByteArray toJSON(bool compact=true);
-    QString makeUploadToken(const QNMac *mac=NULL);
+    QString makeUploadToken(const QNMac *mac=0);
 
     //getters & setters
     QString getScope() const;
@@ -82,6 +83,9 @@ public:
     QString *getCallbackBody() const;
     void setCallbackBody(QString *value);
 
+    qint16 getCallbackFetchKey() const;
+    void setCallbackFetchKey(const qint16 &value);
+
     QString *getReturnUrl() const;
     void setReturnUrl(QString *value);
 
@@ -96,6 +100,7 @@ public:
 
     QString *getPersistentPipeline() const;
     void setPersistentPipeline(QString *value);
+
 };
 
 #endif // QNPUTPOLICY_H

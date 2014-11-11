@@ -5,7 +5,7 @@
 QNPutExtra::QNPutExtra()
 {
     this->params=new QMap<QString,QString>();
-    this->mimeType=NULL;
+    this->mimeType=0;
     this->crc32=-1;
     this->checkCrc32=-1;
 }
@@ -28,7 +28,7 @@ QString QNPutExtra::removeExtraParam(const QString &key) const
 
 QNPutExtra::~QNPutExtra()
 {
-    if(this->params!=NULL)
+    if(this->params!=0)
     {
         delete this->params;
     }

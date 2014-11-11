@@ -9,10 +9,12 @@ class QNPutRet
 private:
     QString *hash;
     QString *key;
+    QString *error;
+    int code;
 public:
     QNPutRet();
     ~QNPutRet();
-    static void fromJSON(const QByteArray &json, QNPutRet *putRet);
+    static QNPutRet* fromJSON(const QByteArray &json);
 
     QString *getHash() const;
     void setHash(QString *value);

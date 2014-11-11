@@ -6,24 +6,25 @@
 
 QNPutRet::QNPutRet()
 {
-    this->hash=NULL;
-    this->key=NULL;
+    this->hash=0;
+    this->key=0;
 }
 
 QNPutRet::~QNPutRet()
 {
-    if(this->hash!=NULL)
+    if(this->hash!=0)
     {
         delete this->hash;
     }
-    if(this->key!=NULL)
+    if(this->key!=0)
     {
         delete this->key;
     }
 }
 
-void QNPutRet::fromJSON(const QByteArray &jsonData, QNPutRet *putRet)
+QNPutRet* QNPutRet::fromJSON(const QByteArray &jsonData)
 {
+    QNPutRet *putRet=new QNPutRet;
     QJsonDocument doc;
     doc=QJsonDocument::fromJson(jsonData);//check error
     QJsonObject json=doc.object();
@@ -33,7 +34,7 @@ void QNPutRet::fromJSON(const QByteArray &jsonData, QNPutRet *putRet)
     key->append(json["key"].toString());
     putRet->setHash(hash);
     putRet->setKey(key);
-    return;
+    return putRet;
 }
 
 QString *QNPutRet::getHash() const

@@ -22,11 +22,11 @@ void QNPutPolicyTest::putRetTest1()
 {
     QByteArray jsonData=QByteArray("{\"hash\":\"Hash data\",\"key\":\"Key data\"}");
     std::cout<<QString(jsonData).toStdString()<<std::endl;
-    QNPutRet putRet;
-    QNPutRet::fromJSON(jsonData, &putRet);
-    std::cout<<putRet.getHash()->toStdString()<<std::endl;
-    std::cout<<putRet.getKey()->toStdString()<<std::endl;
+    QNPutRet *putRet = QNPutRet::fromJSON(jsonData);
+    std::cout<<putRet->getHash()->toStdString()<<std::endl;
+    std::cout<<putRet->getKey()->toStdString()<<std::endl;
     std::cout<<std::endl<<std::endl;
+    delete putRet;
 }
 
 void QNPutPolicyTest::makeUploadTokenTest()

@@ -7,26 +7,37 @@
 #include "qiniu/auth/QNMac.h"
 #include "qiniu/conf/QNConf.h"
 
+
+qint16 QNPutPolicy::getCallbackFetchKey() const
+{
+    return callbackFetchKey;
+}
+
+void QNPutPolicy::setCallbackFetchKey(const qint16 &value)
+{
+    callbackFetchKey = value;
+}
 QNPutPolicy::QNPutPolicy(QString &scope):scope(scope)
 {
     //default is 1970/1/1, timestamp is 0
     deadline=0;
-
+    
     detectMime=-1;
     fSizeLimit=-1;
     insertOnly=-1;
+    callbackFetchKey=-1;
 
-    this->saveKey=NULL;
-    this->endUser=NULL;
-    this->mimeLimit=NULL;
-    this->callbackUrl=NULL;
-    this->callbackHost=NULL;
-    this->callbackBody=NULL;
-    this->returnUrl=NULL;
-    this->returnBody=NULL;
-    this->persistentOps=NULL;
-    this->persistentNotifyUrl=NULL;
-    this->persistentPipeline=NULL;
+    this->saveKey=0;
+    this->endUser=0;
+    this->mimeLimit=0;
+    this->callbackUrl=0;
+    this->callbackHost=0;
+    this->callbackBody=0;
+    this->returnUrl=0;
+    this->returnBody=0;
+    this->persistentOps=0;
+    this->persistentNotifyUrl=0;
+    this->persistentPipeline=0;
 }
 
 QByteArray QNPutPolicy::toJSON(bool compact)
@@ -46,6 +57,10 @@ QByteArray QNPutPolicy::toJSON(bool compact)
     if(detectMime!=-1)
     {
         json["detectMime"]=detectMime;
+    }
+    if(callbackFetchKey!=-1)
+    {
+        json["callbackFetchKey"]=callbackFetchKey;
     }
     if(QNUtils::isParamValid(saveKey))
     {
@@ -115,7 +130,7 @@ QString QNPutPolicy::makeUploadToken(const QNMac *mac)
     }
     QByteArray putPolicyJson=this->toJSON();
     QString uploadToken;
-    if(mac!=NULL)
+    if(mac!=0)
     {
         uploadToken=mac->signWithData(putPolicyJson);
     }
