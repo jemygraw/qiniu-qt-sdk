@@ -21,6 +21,7 @@ private:
     QLineEdit *keyLineEdit;
     QLineEdit *fileNameLineEdit;
     QPushButton *uploadButton;
+    void createLayout();
 public:
     explicit QNSimpleUploadDataWidget(QNetworkAccessManager *networkManager,
                                       QWidget *parent = 0);

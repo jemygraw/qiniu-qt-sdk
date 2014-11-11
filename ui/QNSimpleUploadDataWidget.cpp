@@ -22,7 +22,11 @@ QNSimpleUploadDataWidget::QNSimpleUploadDataWidget(QNetworkAccessManager *networ
 {
     setWindowTitle(tr("Simple Upload Data"));
     this->networkManager=networkManager;
+    this->createLayout();
+}
 
+void QNSimpleUploadDataWidget::createLayout()
+{
     int labelMinWidth=80;
     int editMinWidth=500;
 
@@ -102,7 +106,6 @@ QNSimpleUploadDataWidget::QNSimpleUploadDataWidget(QNetworkAccessManager *networ
     this->setMinimumWidth(500);
     this->setMinimumHeight(400);
 }
-
 
 void QNSimpleUploadDataWidget::uploadData()
 {

@@ -11,10 +11,10 @@
 QNUrlBase64Widget::QNUrlBase64Widget(QWidget *parent): QWidget(parent)
 {
     this->setWindowTitle(tr("Urlsafe Base64 Encode/Decode"));
-    createWidgets();
+    this->createLayout();
 }
 
-void QNUrlBase64Widget::createWidgets()
+void QNUrlBase64Widget::createLayout()
 {
     QGroupBox *toEncodeGBox=new QGroupBox(this);
     toEncodeGBox->setTitle(tr("Urlsafe Base64 Encode"));

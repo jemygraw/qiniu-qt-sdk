@@ -18,7 +18,7 @@ private:
     QTextEdit *toDecodeSrcTextEdit;
     QTextEdit *toDecodeDestTextEdit;
 
-    void createWidgets();
+    void createLayout();
 
 public slots:
     void encodeData();
