@@ -26,22 +26,22 @@ HEADERS += \
         qiniu/utils/QNETag.h \
         qiniu/utils/QNUtils.h \
         qiniu/utils/QNUrl.h \
+        qiniu/fop/QNImageView2.h \
+        qiniu/fop/QNImageMogr2.h \
+        qiniu/fop/QNImageInfo.h \
+        qiniu/fop/QNImageExif.h \
+        qiniu/fop/QNImageWatermark.h \
         test/Base64Test.h \
         test/MacDigestTest.h \
         test/QNUrlTest.h \
         test/QNETagTest.h \
         test/QNPutPolicyTest.h \
         ui/QNMainWindow.h \
-    ui/QNSimpleUploadDataWidget.h \
-    ui/QNCreateSaveAsTokenWidget.h \
-    ui/QNUrlBase64Widget.h \
-    qiniu/fop/QNImageView2.h \
-    ui/QNImageView2Widget.h \
-    qiniu/fop/QNImageMogr2.h \
-    qiniu/fop/QNImageInfo.h \
-    qiniu/fop/QNImageExif.h \
-    qiniu/fop/QNImageWatermark.h \
-    ui/CreatePrivateAccessTokenWidget.h
+        ui/QNSimpleUploadDataWidget.h \
+        ui/QNCreateSaveAsTokenWidget.h \
+        ui/QNUrlBase64Widget.h \
+        ui/QNImageView2Widget.h \
+        ui/QNCreatePrivateAccessTokenWidget.h
 
 
 
@@ -60,22 +60,22 @@ SOURCES += main.cpp \
         qiniu/utils/QNUtils.cpp \
         qiniu/utils/QNEtag.cpp \
         qiniu/utils/QNUrl.cpp \
+        qiniu/fop/QNImageView2.cpp \
+        qiniu/fop/QNImageMogr2.cpp \
+        qiniu/fop/QNImageInfo.cpp \
+        qiniu/fop/QNImageExif.cpp \
+        qiniu/fop/QNImageWatermark.cpp \
         test/Base64Test.cpp \
         test/MacDigestTest.cpp \
         test/QNUrlTest.cpp \
         test/QNETagTest.cpp \
         test/QNPutPolicyTest.cpp \
         ui/QNMainWindow.cpp \
-    ui/QNSimpleUploadDataWidget.cpp \
-    ui/QNCreateSaveAsTokenWidget.cpp \
-    ui/QNUrlBase64Widget.cpp \
-    qiniu/fop/QNImageView2.cpp \
-    ui/QNImageView2Widget.cpp \
-    qiniu/fop/QNImageMogr2.cpp \
-    qiniu/fop/QNImageInfo.cpp \
-    qiniu/fop/QNImageExif.cpp \
-    qiniu/fop/QNImageWatermark.cpp \
-    ui/CreatePrivateAccessTokenWidget.cpp
+        ui/QNSimpleUploadDataWidget.cpp \
+        ui/QNCreateSaveAsTokenWidget.cpp \
+        ui/QNUrlBase64Widget.cpp \
+        ui/QNImageView2Widget.cpp \
+        ui/QNCreatePrivateAccessTokenWidget.cpp
 
 
 
