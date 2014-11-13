@@ -9,6 +9,7 @@
 #include <QDateTime>
 #include <QDate>
 #include <QTime>
+#include <QUrl>
 #include "qiniu/auth/QNMac.h"
 
 QNCreatePrivateAccessTokenWidget::QNCreatePrivateAccessTokenWidget(QWidget *parent) :
@@ -89,8 +90,16 @@ void QNCreatePrivateAccessTokenWidget::createLayout()
 void QNCreatePrivateAccessTokenWidget::createPrivateAccessToken()
 {
     QString srcUrl=this->srcUrlLineEdit->text().trimmed();
+    QUrl srcUri(srcUrl);
     QString expireTimestamp=this->expireTimestampLineEdit->text().trimmed();
-    srcUrl.append("?e=").append(expireTimestamp);
+    if(srcUri.hasQuery())
+    {
+        srcUrl.append("&e=").append(expireTimestamp);
+    }
+    else
+    {
+        srcUrl.append("?e=").append(expireTimestamp);
+    }
     QString accessKey=this->accessKeyLineEdit->text().trimmed();
     QString secretKey=this->secretKeyLineEdit->text().trimmed();
     QByteArray secretKeyBytes=secretKey.toLocal8Bit();
