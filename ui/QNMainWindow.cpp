@@ -4,6 +4,7 @@
 #include "QNUrlBase64Widget.h"
 #include "QNImageView2Widget.h"
 #include <QNetworkAccessManager>
+#include <QLabel>
 #include <QAction>
 #include <QMenu>
 #include <QMenuBar>
@@ -12,6 +13,10 @@
 #include <QApplication>
 #include <QStackedWidget>
 #include <QLayout>
+#include <QGroupBox>
+#include <QLineEdit>
+#include <QSettings>
+#include <QPushButton>
 
 QNMainWindow::QNMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,10 +24,72 @@ QNMainWindow::QNMainWindow(QWidget *parent)
    setWindowTitle(tr("Qiniu Qt SDK & Tools"));
    setUnifiedTitleAndToolBarOnMac(true);
    networkManager=new QNetworkAccessManager(this);
+   createGlobalWidgets();
    createMenus();
    createWidgets();
    this->setMinimumWidth(500);
    this->setMinimumHeight(200);
+
+   globalSettings=new QSettings(this);
+   QString accessKey=globalSettings->value("AccessKey").toString();
+   QString secretKey=globalSettings->value("SecretKey").toString();
+   this->accessKeyLineEdit->setText(accessKey);
+   this->secretKeyLineEdit->setText(secretKey);
+}
+
+void QNMainWindow::createGlobalWidgets()
+{
+    QGroupBox *docGroupBox=new QGroupBox(this);
+    docGroupBox->setTitle(tr("Most Visited Sites:"));
+    QLabel *homeSiteLabel=new QLabel(tr("Home:"));
+    QLabel *docSiteLabel=new QLabel(tr("Document:"));
+    QLabel *qaSiteLabel=new QLabel(tr("Forum:"));
+    qiniuHomeSiteLabel=new QLabel("<a href='http://www.qiniu.com/'>http://www.qiniu.com/</a>");
+    qiniuDocSiteLabel=new QLabel("<a href='http://developer.qiniu.com/'>http://developer.qiniu.com/</a>");
+    qiniuQASiteLabel=new QLabel("<a href='http://segmentfault.com/qiniu'>http://segmentfault.com/qiniu</a>");
+    qiniuHomeSiteLabel->setOpenExternalLinks(true);
+    qiniuDocSiteLabel->setOpenExternalLinks(true);
+    qiniuQASiteLabel->setOpenExternalLinks(true);
+    QGridLayout *docGridLayout=new QGridLayout;
+    docGridLayout->addWidget(homeSiteLabel,0,0);
+    docGridLayout->addWidget(qiniuHomeSiteLabel,0,1);
+    docGridLayout->addWidget(docSiteLabel,1,0);
+    docGridLayout->addWidget(qiniuDocSiteLabel,1,1);
+    docGridLayout->addWidget(qaSiteLabel,2,0);
+    docGridLayout->addWidget(qiniuQASiteLabel,2,1);
+    docGroupBox->setLayout(docGridLayout);
+
+    QGroupBox *akskGroupBox=new QGroupBox(this);
+    QVBoxLayout *akskLayout=new QVBoxLayout;
+    akskGroupBox->setTitle(tr("Global Access Key && Secret Key"));
+    QLabel *accessKeyLabel=new QLabel(tr("Access Key:"));
+    QLabel *secretKeyLabel=new QLabel(tr("Secret Key:"));
+    accessKeyLineEdit=new QLineEdit;
+    secretKeyLineEdit=new QLineEdit;
+    QGridLayout *akskGridLayout=new QGridLayout;
+    akskGridLayout->addWidget(accessKeyLabel,0,0);
+    akskGridLayout->addWidget(accessKeyLineEdit,0,1);
+    akskGridLayout->addWidget(secretKeyLabel,1,0);
+    akskGridLayout->addWidget(secretKeyLineEdit,1,1);
+
+    QHBoxLayout *saveBtnLayout=new QHBoxLayout;
+    saveGlobalAKSKBtn=new QPushButton(tr("Save"));
+    saveBtnLayout->addStretch();
+    saveBtnLayout->addWidget(saveGlobalAKSKBtn);
+
+    akskLayout->addLayout(akskGridLayout);
+    akskLayout->addLayout(saveBtnLayout);
+    akskGroupBox->setLayout(akskLayout);
+
+    QVBoxLayout *mainLayout=new QVBoxLayout;
+    mainLayout->addWidget(docGroupBox);
+    mainLayout->addWidget(akskGroupBox);
+
+    QWidget *mainWidget=new QWidget(this);
+    mainWidget->setLayout(mainLayout);
+    this->setCentralWidget(mainWidget);
+
+    connect(saveGlobalAKSKBtn,SIGNAL(clicked()),this,SLOT(saveGlobalSettings()));
 }
 
 void QNMainWindow::createMenus()
@@ -118,4 +185,12 @@ void QNMainWindow::imageView2Slot()
         imageView2Widget=new QNImageView2Widget();
     }
     this->imageView2Widget->show();
+}
+
+void QNMainWindow::saveGlobalSettings()
+{
+    QString accessKey=this->accessKeyLineEdit->text().trimmed();
+    QString secretKey=this->secretKeyLineEdit->text().trimmed();
+    globalSettings->setValue("AccessKey",accessKey);
+    globalSettings->setValue("SecretKey",secretKey);
 }

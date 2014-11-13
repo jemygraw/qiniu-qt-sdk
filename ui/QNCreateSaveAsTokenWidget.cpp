@@ -1,25 +1,30 @@
 #include "QNCreateSaveAsTokenWidget.h"
+#include "qiniu/utils/QNUtils.h"
 #include <QLineEdit>
 #include <QLabel>
 #include <QPushButton>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include "qiniu/utils/QNUtils.h"
-#include <iostream>
 #include <QUrl>
+#include <QSettings>
 
 QNCreateSaveAsTokenWidget::QNCreateSaveAsTokenWidget(QWidget *parent): QWidget(parent)
 {
     this->setWindowTitle(tr("Create Saveas Token"));
     createLayout();
+    globalSettings=new QSettings(this);
+    QString accessKey=globalSettings->value("AccessKey").toString();
+    QString secretKey=globalSettings->value("SecretKey").toString();
+    this->accessKeyLineEdit->setText(accessKey);
+    this->secretKeyLineEdit->setText(secretKey);
 }
 
 void QNCreateSaveAsTokenWidget::createLayout()
 {
     QGridLayout  *mainGridLayout=new QGridLayout;
 
-    QLabel *srcUrlLabel=new QLabel(tr("Src Url:"),this);
+    QLabel *srcUrlLabel=new QLabel(tr("Src Persist Url:"),this);
     QLabel *accessKeyLabel=new QLabel(tr("Access Key:"),this);
     QLabel *secretKeyLabel=new QLabel(tr("Secret Key:"),this);
     QLabel *tokenLabel=new QLabel(tr("Token:"),this);

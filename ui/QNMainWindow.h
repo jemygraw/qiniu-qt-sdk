@@ -3,7 +3,10 @@
 
 #include <QMainWindow>
 class QAction;
-class QStackedWidget;
+class QLineEdit;
+class QPushButton;
+class QLabel;
+class QSettings;
 class QNetworkAccessManager;
 class QNSimpleUploadDataWidget;
 class QNCreateSaveAsTokenWidget;
@@ -32,6 +35,7 @@ private:
     QAction *imageView2Action;
 
     //methods
+    void createGlobalWidgets();
     void createMenus();
     void createWidgets();
 
@@ -41,6 +45,21 @@ private:
     QNUrlBase64Widget *urlBase64Widget;
     QNImageView2Widget *imageView2Widget;
 
+    //widgets
+    QLineEdit *accessKeyLineEdit;
+    QLineEdit *secretKeyLineEdit;
+
+    //public info
+    QLabel *qiniuHomeSiteLabel;
+    QLabel *qiniuDocSiteLabel;
+    QLabel *qiniuQASiteLabel;
+
+    QLineEdit *globalAccessKeyLineEdit;
+    QLineEdit *globalSecretLineEdit;
+    QPushButton *saveGlobalAKSKBtn;
+
+    //settings
+    QSettings *globalSettings;
 public:
     QNetworkAccessManager *networkManager;
 
@@ -53,6 +72,7 @@ public slots:
     void createSaveAsTokenSlot();
     void base64Slot();
     void imageView2Slot();
+    void saveGlobalSettings();
 };
 
 #endif // QNMAINWINDOW_H

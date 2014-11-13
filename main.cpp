@@ -14,6 +14,9 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc,argv);
+    QApplication::setOrganizationName("Qiniu Cloud Storage");
+    QApplication::setOrganizationDomain("qiniu.com");
+    QApplication::setApplicationName("Qiniu Qt SDK & Tools");
     QNMainWindow *wnd=new QNMainWindow();
     wnd->show();
     return app.exec();

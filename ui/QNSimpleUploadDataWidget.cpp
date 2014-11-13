@@ -5,7 +5,6 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLineEdit>
-#include <iostream>
 #include <QNetworkReply>
 #include "qiniu/conf/QNConf.h"
 #include "qiniu/io/QNIOHelper.h"
@@ -16,6 +15,7 @@
 #include <QJsonObject>
 #include <QMessageBox>
 #include "qiniu/rs/QNPutRet.h"
+#include <QSettings>
 
 QNSimpleUploadDataWidget::QNSimpleUploadDataWidget(QNetworkAccessManager *networkManager,
                                                    QWidget *parent) : QWidget(parent)
@@ -23,6 +23,11 @@ QNSimpleUploadDataWidget::QNSimpleUploadDataWidget(QNetworkAccessManager *networ
     setWindowTitle(tr("Simple Upload Data"));
     this->networkManager=networkManager;
     this->createLayout();
+    globalSettings=new QSettings(this);
+    QString accessKey=globalSettings->value("AccessKey").toString();
+    QString secretKey=globalSettings->value("SecretKey").toString();
+    this->accessKeyLineEdit->setText(accessKey);
+    this->secretKeyLineEdit->setText(secretKey);
 }
 
 void QNSimpleUploadDataWidget::createLayout()
@@ -131,19 +136,16 @@ void QNSimpleUploadDataWidget::uploadData()
 
 void QNSimpleUploadDataWidget::recvData()
 {
-    std::cout<<"recv data"<<std::endl;
     QNetworkReply *reply = qobject_cast<QNetworkReply*>(QObject::sender());
     if (reply) {
         if (reply->error() == QNetworkReply::NoError) {
             QByteArray respData=reply->readAll();
             QNPutRet *putRet=QNPutRet::fromJSON(respData);
-            std::cout<<putRet->getHash()<<std::endl;
             delete putRet;
         } else {
             //get http status code
             int httpStatus = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
             //do some error management
-            std::cout<<httpStatus<<std::endl;
         }
         reply->deleteLater();
     }
@@ -152,5 +154,5 @@ void QNSimpleUploadDataWidget::recvData()
 void QNSimpleUploadDataWidget::handleError()
 {
 
-    std::cout<<"fuck"<<std::endl;
+
 }

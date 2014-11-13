@@ -6,6 +6,7 @@
 class QTextEdit;
 class QPushButton;
 class QLineEdit;
+class QSettings;
 class QNetworkAccessManager;
 
 class QNSimpleUploadDataWidget : public QWidget
@@ -21,6 +22,7 @@ private:
     QLineEdit *keyLineEdit;
     QLineEdit *fileNameLineEdit;
     QPushButton *uploadButton;
+    QSettings *globalSettings;
     void createLayout();
 public:
     explicit QNSimpleUploadDataWidget(QNetworkAccessManager *networkManager,

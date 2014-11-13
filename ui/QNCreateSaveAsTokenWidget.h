@@ -6,6 +6,7 @@ class QGridLayout;
 class QLineEdit;
 class QPushButton;
 class QLabel;
+class QSettings;
 
 class QNCreateSaveAsTokenWidget : public QWidget
 {
@@ -26,6 +27,7 @@ private:
     QLineEdit *signedTokenLineEdit;
     QLineEdit *newUrlLineEdit;
     QPushButton *createTokenButton;
+    QSettings *globalSettings;
 
 };
 
