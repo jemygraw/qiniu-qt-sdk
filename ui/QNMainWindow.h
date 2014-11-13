@@ -2,6 +2,7 @@
 #define QNMAINWINDOW_H
 
 #include <QMainWindow>
+
 class QAction;
 class QLineEdit;
 class QPushButton;
@@ -10,6 +11,7 @@ class QSettings;
 class QNetworkAccessManager;
 class QNSimpleUploadDataWidget;
 class QNCreateSaveAsTokenWidget;
+class QNCreatePrivateAccessTokenWidget;
 class QNUrlBase64Widget;
 class QNImageView2Widget;
 
@@ -25,6 +27,7 @@ private:
     //tool menu
     QAction *createSaveAsTokenAction;
     QAction *base64Action;
+    QAction *createPrivateAccessTokenAction;
 
     //upload menu
     QAction *simpleUploadDataAction;
@@ -44,6 +47,7 @@ private:
     QNCreateSaveAsTokenWidget *createSaveAsTokenWidget;
     QNUrlBase64Widget *urlBase64Widget;
     QNImageView2Widget *imageView2Widget;
+    QNCreatePrivateAccessTokenWidget *createPrivateAccessTokenWidget;
 
     //widgets
     QLineEdit *accessKeyLineEdit;
@@ -72,7 +76,8 @@ public slots:
     void createSaveAsTokenSlot();
     void base64Slot();
     void imageView2Slot();
-    void saveGlobalSettings();
+    void saveGlobalSettingsSlot();
+    void createPrivateAccessTokenSlot();
 };
 
 #endif // QNMAINWINDOW_H

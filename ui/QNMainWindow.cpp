@@ -1,6 +1,7 @@
 #include "QNMainWindow.h"
 #include "QNSimpleUploadDataWidget.h"
 #include "QNCreateSaveAsTokenWidget.h"
+#include "QNCreatePrivateAccessTokenWidget.h"
 #include "QNUrlBase64Widget.h"
 #include "QNImageView2Widget.h"
 #include <QNetworkAccessManager>
@@ -89,7 +90,7 @@ void QNMainWindow::createGlobalWidgets()
     mainWidget->setLayout(mainLayout);
     this->setCentralWidget(mainWidget);
 
-    connect(saveGlobalAKSKBtn,SIGNAL(clicked()),this,SLOT(saveGlobalSettings()));
+    connect(saveGlobalAKSKBtn,SIGNAL(clicked()),this,SLOT(saveGlobalSettingsSlot()));
 }
 
 void QNMainWindow::createMenus()
@@ -122,14 +123,17 @@ void QNMainWindow::createMenus()
     //tool menu
     createSaveAsTokenAction=new QAction(tr("Create SaveAs Token"),this);
     base64Action=new QAction(tr("Urlsafe Base64 Encode/Decode"),this);
+    createPrivateAccessTokenAction=new QAction(tr("Create Private Access Token"),this);
     QMenu *toolMenu=menuBar()->addMenu(tr("Tools"));
     toolMenu->addAction(base64Action);
     toolMenu->addAction(createSaveAsTokenAction);
+    toolMenu->addAction(createPrivateAccessTokenAction);
 
 
     connect(base64Action,SIGNAL(triggered()),this,SLOT(base64Slot()));
     connect(createSaveAsTokenAction,SIGNAL(triggered()),this,SLOT(createSaveAsTokenSlot()));
     connect(imageView2Action,SIGNAL(triggered()),this,SLOT(imageView2Slot()));
+    connect(createPrivateAccessTokenAction,SIGNAL(triggered()),this,SLOT(createPrivateAccessTokenSlot()));
 
     menuBar()->addMenu(sysMenu);
     menuBar()->addMenu(uploadMenu);
@@ -144,6 +148,7 @@ void QNMainWindow::createWidgets()
     createSaveAsTokenWidget=0;
     urlBase64Widget=0;
     imageView2Widget=0;
+    createPrivateAccessTokenWidget=0;
 }
 
 QNMainWindow::~QNMainWindow()
@@ -187,10 +192,20 @@ void QNMainWindow::imageView2Slot()
     this->imageView2Widget->show();
 }
 
-void QNMainWindow::saveGlobalSettings()
+void QNMainWindow::createPrivateAccessTokenSlot()
+{
+    if(createPrivateAccessTokenWidget==0)
+    {
+        createPrivateAccessTokenWidget=new QNCreatePrivateAccessTokenWidget();
+    }
+    this->createPrivateAccessTokenWidget->show();
+}
+
+void QNMainWindow::saveGlobalSettingsSlot()
 {
     QString accessKey=this->accessKeyLineEdit->text().trimmed();
     QString secretKey=this->secretKeyLineEdit->text().trimmed();
     globalSettings->setValue("AccessKey",accessKey);
     globalSettings->setValue("SecretKey",secretKey);
 }
+
