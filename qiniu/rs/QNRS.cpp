@@ -77,7 +77,10 @@ QNetworkRequest QNRS::copyRequest(const QString &srcBucket, const QString &srcKe
         accessToken=macx.signRequest(request);
     }
     authHeaderBody.append(accessToken);
+    QString contentTypeHeader("Content-Type");
+    QString contentTypeHeaderBody("application/x-www-form-urlencoded");
     request.setRawHeader(authHeader.toLocal8Bit(),authHeaderBody.toLocal8Bit());
+    request.setRawHeader(contentTypeHeader.toLocal8Bit(),contentTypeHeaderBody.toLocal8Bit());
     return request;
 }
 
@@ -114,7 +117,10 @@ QNetworkRequest QNRS::moveRequest(const QString &srcBucket, const QString &srcKe
         accessToken=macx.signRequest(request);
     }
     authHeaderBody.append(accessToken);
+    QString contentTypeHeader("Content-Type");
+    QString contentTypeHeaderBody("application/x-www-form-urlencoded");
     request.setRawHeader(authHeader.toLocal8Bit(),authHeaderBody.toLocal8Bit());
+    request.setRawHeader(contentTypeHeader.toLocal8Bit(),contentTypeHeaderBody.toLocal8Bit());
     return request;
 }
 
@@ -147,6 +153,48 @@ QNetworkRequest QNRS::deleteRequest(const QString &bucket, const QString &key,
         accessToken=macx.signRequest(request);
     }
     authHeaderBody.append(accessToken);
+    QString contentTypeHeader("Content-Type");
+    QString contentTypeHeaderBody("application/x-www-form-urlencoded");
     request.setRawHeader(authHeader.toLocal8Bit(),authHeaderBody.toLocal8Bit());
+    request.setRawHeader(contentTypeHeader.toLocal8Bit(),contentTypeHeaderBody.toLocal8Bit());
+    return request;
+}
+
+//Change file mimetype
+QNetworkRequest QNRS::chgmRequest(const QString &bucket, const QString &key,
+                                  const QString &newMimeType,
+                                  const QNMac *mac)
+{
+    QNetworkRequest request;
+    QString reqUrl(QNConf::RS_HOST);
+    reqUrl.append("/chgm/");
+
+    //append encoded entry
+    QString entry;
+    entry.append(bucket).append(":").append(key);
+    QString encodedEntry=QNUtils::urlSafeBase64Encode(entry.toLocal8Bit());
+    reqUrl.append(encodedEntry);
+    QString encodedMimeType=QNUtils::urlSafeBase64Encode(newMimeType.toLocal8Bit());
+    reqUrl.append("/mime/").append(encodedMimeType);
+    request.setUrl(reqUrl);
+
+    //set authorization header
+    QString authHeader("Authorization");
+    QString authHeaderBody("QBox ");
+    QString accessToken;
+    if(mac!=0)
+    {
+        accessToken=mac->signRequest(request);
+    }
+    else
+    {
+        QNMac macx=QNMac(QNConf::ACCESS_KEY,QNConf::SECRET_KEY);
+        accessToken=macx.signRequest(request);
+    }
+    authHeaderBody.append(accessToken);
+    QString contentTypeHeader("Content-Type");
+    QString contentTypeHeaderBody("application/x-www-form-urlencoded");
+    request.setRawHeader(authHeader.toLocal8Bit(),authHeaderBody.toLocal8Bit());
+    request.setRawHeader(contentTypeHeader.toLocal8Bit(),contentTypeHeaderBody.toLocal8Bit());
     return request;
 }
