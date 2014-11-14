@@ -5,6 +5,9 @@
 #include "QNUrlBase64Widget.h"
 #include "QNImageView2Widget.h"
 #include "QNRSStatWidget.h"
+#include "QNRSDeleteWidget.h"
+#include "QNRSCopyWidget.h"
+#include "QNRSMoveWidget.h"
 #include <QNetworkAccessManager>
 #include <QLabel>
 #include <QAction>
@@ -134,12 +137,14 @@ void QNMainWindow::createMenus()
     rsStatAction=new QAction(tr("Stat"),this);
     rsCopyAction=new QAction(tr("Copy"),this);
     rsMoveAction=new QAction(tr("Move"),this);
+    rsDeleteAction=new QAction(tr("Delete"),this);
     rsBatchAction=new QAction(tr("Batch"),this);
     rsChgmAction=new QAction(tr("Chgm"),this);
     QMenu *rsMenu=new QMenu(tr("Resource"));
     rsMenu->addAction(rsStatAction);
     rsMenu->addAction(rsCopyAction);
     rsMenu->addAction(rsMoveAction);
+    rsMenu->addAction(rsDeleteAction);
     rsMenu->addAction(rsBatchAction);
     rsMenu->addAction(rsChgmAction);
 
@@ -152,6 +157,7 @@ void QNMainWindow::createMenus()
     connect(rsStatAction,SIGNAL(triggered()),this,SLOT(rsStatSlot()));
     connect(rsCopyAction,SIGNAL(triggered()),this,SLOT(rsCopySlot()));
     connect(rsMoveAction,SIGNAL(triggered()),this,SLOT(rsMoveSlot()));
+    connect(rsDeleteAction,SIGNAL(triggered()),this,SLOT(rsDeleteSlot()));
     connect(rsBatchAction,SIGNAL(triggered()),this,SLOT(rsBatchSlot()));
     connect(rsChgmAction,SIGNAL(triggered()),this,SLOT(rsChgmSlot()));
 
@@ -171,6 +177,9 @@ void QNMainWindow::createWidgets()
     imageView2Widget=0;
     createPrivateAccessTokenWidget=0;
     rsStatWidget=0;
+    rsDeleteWidget=0;
+    rsCopyWidget=0;
+    rsMoveWidget=0;
 }
 
 QNMainWindow::~QNMainWindow()
@@ -234,12 +243,29 @@ void QNMainWindow::rsStatSlot()
 
 void QNMainWindow::rsCopySlot()
 {
-
+    if(rsCopyWidget==0)
+    {
+        rsCopyWidget=new QNRSCopyWidget(*networkManager);
+    }
+    rsCopyWidget->show();
 }
 
 void QNMainWindow::rsMoveSlot()
 {
+    if(rsMoveWidget==0)
+    {
+        rsMoveWidget=new QNRSMoveWidget(*networkManager);
+    }
+    rsMoveWidget->show();
+}
 
+void QNMainWindow::rsDeleteSlot()
+{
+    if(rsDeleteWidget==0)
+    {
+        rsDeleteWidget=new QNRSDeleteWidget(*networkManager);
+    }
+    rsDeleteWidget->show();
 }
 
 void QNMainWindow::rsBatchSlot()

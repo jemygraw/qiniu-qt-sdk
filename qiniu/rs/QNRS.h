@@ -20,6 +20,9 @@ public:
                                        const QString &destBucket, const QString &destKey,
                                        const QNMac *mac=0);
 
+    static QNetworkRequest deleteRequest(const QString &bucket, const QString &key,
+                                       const QNMac *mac=0);
+
     static QNetworkRequest batchRequest(const QStringList &operations,
                                         const QNMac *mac=0);
 

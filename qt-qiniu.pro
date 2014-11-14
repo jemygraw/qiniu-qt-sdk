@@ -44,7 +44,10 @@ HEADERS += \
         ui/QNUrlBase64Widget.h \
         ui/QNImageView2Widget.h \
         ui/QNCreatePrivateAccessTokenWidget.h \
-    ui/QNRSStatWidget.h
+    ui/QNRSStatWidget.h \
+    ui/QNRSDeleteWidget.h \
+    ui/QNRSCopyWidget.h \
+    ui/QNRSMoveWidget.h
 
 
 
@@ -79,7 +82,10 @@ SOURCES += main.cpp \
         ui/QNUrlBase64Widget.cpp \
         ui/QNImageView2Widget.cpp \
         ui/QNCreatePrivateAccessTokenWidget.cpp \
-    ui/QNRSStatWidget.cpp
+    ui/QNRSStatWidget.cpp \
+    ui/QNRSDeleteWidget.cpp \
+    ui/QNRSCopyWidget.cpp \
+    ui/QNRSMoveWidget.cpp
 
 
 

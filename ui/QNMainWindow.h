@@ -13,6 +13,9 @@ class QNSimpleUploadDataWidget;
 class QNCreateSaveAsTokenWidget;
 class QNCreatePrivateAccessTokenWidget;
 class QNRSStatWidget;
+class QNRSDeleteWidget;
+class QNRSCopyWidget;
+class QNRSMoveWidget;
 class QNUrlBase64Widget;
 class QNImageView2Widget;
 
@@ -39,6 +42,7 @@ private:
     QAction *rsStatAction;
     QAction *rsCopyAction;
     QAction *rsMoveAction;
+    QAction *rsDeleteAction;
     QAction *rsBatchAction;
     QAction *rsChgmAction;
 
@@ -58,6 +62,9 @@ private:
     QNCreatePrivateAccessTokenWidget *createPrivateAccessTokenWidget;
 
     QNRSStatWidget *rsStatWidget;
+    QNRSDeleteWidget *rsDeleteWidget;
+    QNRSCopyWidget *rsCopyWidget;
+    QNRSMoveWidget *rsMoveWidget;
 
     //widgets
     QLineEdit *accessKeyLineEdit;
@@ -92,6 +99,7 @@ public slots:
     void rsStatSlot();
     void rsCopySlot();
     void rsMoveSlot();
+    void rsDeleteSlot();
     void rsBatchSlot();
     void rsChgmSlot();
 };
