@@ -13,6 +13,7 @@ class QNSimpleUploadDataWidget;
 class QNCreateSaveAsTokenWidget;
 class QNCreatePrivateAccessTokenWidget;
 class QNRSStatWidget;
+class QNRSChgmWidget;
 class QNRSDeleteWidget;
 class QNRSCopyWidget;
 class QNRSMoveWidget;
@@ -65,6 +66,7 @@ private:
     QNRSDeleteWidget *rsDeleteWidget;
     QNRSCopyWidget *rsCopyWidget;
     QNRSMoveWidget *rsMoveWidget;
+    QNRSChgmWidget *rsChgmWidget;
 
     //widgets
     QLineEdit *accessKeyLineEdit;

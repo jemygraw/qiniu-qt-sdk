@@ -101,7 +101,8 @@ void QNRSCopyWidget::copySlot()
     QByteArray secretKeyBytes=secretKey.toLocal8Bit();
     QNMac mac(accessKey,secretKeyBytes);
     QNetworkRequest request=QNRS::copyRequest(srcBucket,srcKey,destBucket,destKey,&mac);
-    QNetworkReply *reply=networkManager.get(request);
+    QByteArray postData;
+    QNetworkReply *reply=networkManager.post(request,postData);
     connect(reply,SIGNAL(finished()),this,SLOT(recvData()));
     connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),
             this,SLOT(handleError(QNetworkReply::NetworkError)));

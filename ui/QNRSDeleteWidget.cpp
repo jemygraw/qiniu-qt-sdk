@@ -86,7 +86,8 @@ void QNRSDeleteWidget::deleteSlot()
     QByteArray secretKeyBytes=secretKey.toLocal8Bit();
     QNMac mac(accessKey,secretKeyBytes);
     QNetworkRequest request=QNRS::deleteRequest(bucket,key,&mac);
-    QNetworkReply *reply=networkManager.get(request);
+    QByteArray postData;
+    QNetworkReply *reply=networkManager.post(request,postData);
     connect(reply,SIGNAL(finished()),this,SLOT(recvData()));
     connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),
             this,SLOT(handleError(QNetworkReply::NetworkError)));
