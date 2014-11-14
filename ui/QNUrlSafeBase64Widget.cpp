@@ -1,4 +1,4 @@
-#include "QNUrlBase64Widget.h"
+#include "QNUrlSafeBase64Widget.h"
 #include "qiniu/utils/QNUtils.h"
 #include <QGridLayout>
 #include <QLabel>
@@ -8,13 +8,13 @@
 #include <QVBoxLayout>
 #include <QTextEdit>
 
-QNUrlBase64Widget::QNUrlBase64Widget(QWidget *parent): QWidget(parent)
+QNUrlSafeBase64Widget::QNUrlSafeBase64Widget(QWidget *parent): QWidget(parent)
 {
     this->setWindowTitle(tr("Urlsafe Base64 Encode/Decode"));
     this->createLayout();
 }
 
-void QNUrlBase64Widget::createLayout()
+void QNUrlSafeBase64Widget::createLayout()
 {
     QGroupBox *toEncodeGBox=new QGroupBox(this);
     toEncodeGBox->setTitle(tr("Urlsafe Base64 Encode"));
@@ -63,14 +63,14 @@ void QNUrlBase64Widget::createLayout()
 
 }
 
-void QNUrlBase64Widget::encodeData()
+void QNUrlSafeBase64Widget::encodeData()
 {
     QString toEncodeData=this->toEncodeSrcTextEdit->document()->toPlainText().trimmed();
     QString encodeData=QNUtils::urlSafeBase64Encode(toEncodeData.toLocal8Bit());
     this->toEncodeDestTextEdit->setText(encodeData);
 }
 
-void QNUrlBase64Widget::decodeData()
+void QNUrlSafeBase64Widget::decodeData()
 {
     QString toDecodeData=this->toDecodeSrcTextEdit->document()->toPlainText().trimmed();
     QString decodeData=QNUtils::urlSafeBase64Decode(toDecodeData.toLocal8Bit());

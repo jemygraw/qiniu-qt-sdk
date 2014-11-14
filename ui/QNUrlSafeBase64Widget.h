@@ -1,10 +1,10 @@
-#ifndef QNURLBASE64WIDGET_H
-#define QNURLBASE64WIDGET_H
+#ifndef QNURLSAFEBASE64WIDGET_H
+#define QNURLSAFEBASE64WIDGET_H
 #include <QWidget>
 
 class QPushButton;
 class QTextEdit;
-class QNUrlBase64Widget : public QWidget
+class QNUrlSafeBase64Widget : public QWidget
 {
     Q_OBJECT
 
@@ -25,8 +25,8 @@ public slots:
     void decodeData();
 
 public:
-    QNUrlBase64Widget(QWidget *parent=0);
+    QNUrlSafeBase64Widget(QWidget *parent=0);
 
 };
 
-#endif // QNURLBASE64WIDGET_H
+#endif // QNURLSAFEBASE64WIDGET_H

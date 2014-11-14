@@ -2,7 +2,7 @@
 #include "QNSimpleUploadDataWidget.h"
 #include "QNCreateSaveAsTokenWidget.h"
 #include "QNCreatePrivateAccessTokenWidget.h"
-#include "QNUrlBase64Widget.h"
+#include "QNUrlSafeBase64Widget.h"
 #include "QNImageView2Widget.h"
 #include "QNRSStatWidget.h"
 #include "QNRSDeleteWidget.h"
@@ -128,10 +128,10 @@ void QNMainWindow::createMenus()
 
     //tool menu
     createSaveAsTokenAction=new QAction(tr("Create SaveAs Token"),this);
-    base64Action=new QAction(tr("Urlsafe Base64 Encode/Decode"),this);
+    urlsafeBase64Action=new QAction(tr("Urlsafe Base64 Encode/Decode"),this);
     createPrivateAccessTokenAction=new QAction(tr("Create Private Access Token"),this);
     QMenu *toolMenu=new QMenu(tr("Tools"));
-    toolMenu->addAction(base64Action);
+    toolMenu->addAction(urlsafeBase64Action);
     toolMenu->addAction(createSaveAsTokenAction);
     toolMenu->addAction(createPrivateAccessTokenAction);
 
@@ -154,7 +154,7 @@ void QNMainWindow::createMenus()
     rsMenu->addAction(rsBatchAction);
 
     //bind signals with slots
-    connect(base64Action,SIGNAL(triggered()),this,SLOT(base64Slot()));
+    connect(urlsafeBase64Action,SIGNAL(triggered()),this,SLOT(base64Slot()));
     connect(createSaveAsTokenAction,SIGNAL(triggered()),this,SLOT(createSaveAsTokenSlot()));
     connect(imageView2Action,SIGNAL(triggered()),this,SLOT(imageView2Slot()));
     connect(createPrivateAccessTokenAction,SIGNAL(triggered()),this,SLOT(createPrivateAccessTokenSlot()));
@@ -178,7 +178,7 @@ void QNMainWindow::createWidgets()
     //init
     simpleUploadDataWidget=0;
     createSaveAsTokenWidget=0;
-    urlBase64Widget=0;
+    urlsafeBase64Widget=0;
     imageView2Widget=0;
     createPrivateAccessTokenWidget=0;
     rsStatWidget=0;
@@ -214,11 +214,11 @@ void QNMainWindow::createSaveAsTokenSlot()
 
 void QNMainWindow::base64Slot()
 {
-    if(urlBase64Widget==0)
+    if(urlsafeBase64Widget==0)
     {
-        urlBase64Widget=new QNUrlBase64Widget();
+        urlsafeBase64Widget=new QNUrlSafeBase64Widget();
     }
-    this->urlBase64Widget->show();
+    this->urlsafeBase64Widget->show();
 }
 
 void QNMainWindow::imageView2Slot()

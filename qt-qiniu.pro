@@ -41,7 +41,6 @@ HEADERS += \
         ui/QNMainWindow.h \
         ui/QNSimpleUploadDataWidget.h \
         ui/QNCreateSaveAsTokenWidget.h \
-        ui/QNUrlBase64Widget.h \
         ui/QNImageView2Widget.h \
         ui/QNCreatePrivateAccessTokenWidget.h \
     ui/QNRSStatWidget.h \
@@ -49,7 +48,8 @@ HEADERS += \
     ui/QNRSCopyWidget.h \
     ui/QNRSMoveWidget.h \
     ui/QNRSChgmWidget.h \
-    ui/QNRSBatchWidget.h
+    ui/QNRSBatchWidget.h \
+    ui/QNUrlSafeBase64Widget.h
 
 
 
@@ -81,7 +81,6 @@ SOURCES += main.cpp \
         ui/QNMainWindow.cpp \
         ui/QNSimpleUploadDataWidget.cpp \
         ui/QNCreateSaveAsTokenWidget.cpp \
-        ui/QNUrlBase64Widget.cpp \
         ui/QNImageView2Widget.cpp \
         ui/QNCreatePrivateAccessTokenWidget.cpp \
     ui/QNRSStatWidget.cpp \
@@ -89,7 +88,8 @@ SOURCES += main.cpp \
     ui/QNRSCopyWidget.cpp \
     ui/QNRSMoveWidget.cpp \
     ui/QNRSChgmWidget.cpp \
-    ui/QNRSBatchWidget.cpp
+    ui/QNRSBatchWidget.cpp \
+    ui/QNUrlSafeBase64Widget.cpp
 
 
 

@@ -18,7 +18,7 @@ class QNRSDeleteWidget;
 class QNRSCopyWidget;
 class QNRSMoveWidget;
 class QNRSBatchWidget;
-class QNUrlBase64Widget;
+class QNUrlSafeBase64Widget;
 class QNImageView2Widget;
 
 class QNMainWindow : public QMainWindow
@@ -32,7 +32,7 @@ private:
 
     //tool menu
     QAction *createSaveAsTokenAction;
-    QAction *base64Action;
+    QAction *urlsafeBase64Action;
     QAction *createPrivateAccessTokenAction;
 
     //upload menu
@@ -59,7 +59,7 @@ private:
     //objects
     QNSimpleUploadDataWidget *simpleUploadDataWidget;
     QNCreateSaveAsTokenWidget *createSaveAsTokenWidget;
-    QNUrlBase64Widget *urlBase64Widget;
+    QNUrlSafeBase64Widget *urlsafeBase64Widget;
     QNImageView2Widget *imageView2Widget;
     QNCreatePrivateAccessTokenWidget *createPrivateAccessTokenWidget;
 
