@@ -8,6 +8,7 @@
 #include "QNRSDeleteWidget.h"
 #include "QNRSCopyWidget.h"
 #include "QNRSMoveWidget.h"
+#include "QNRSChgmWidget.h"
 #include <QNetworkAccessManager>
 #include <QLabel>
 #include <QAction>
@@ -180,6 +181,7 @@ void QNMainWindow::createWidgets()
     rsDeleteWidget=0;
     rsCopyWidget=0;
     rsMoveWidget=0;
+    rsChgmWidget=0;
 }
 
 QNMainWindow::~QNMainWindow()
@@ -275,7 +277,11 @@ void QNMainWindow::rsBatchSlot()
 
 void QNMainWindow::rsChgmSlot()
 {
-
+    if(rsChgmWidget==0)
+    {
+        rsChgmWidget=new QNRSChgmWidget(*networkManager);
+    }
+    rsChgmWidget->show();
 }
 
 void QNMainWindow::saveGlobalSettingsSlot()
