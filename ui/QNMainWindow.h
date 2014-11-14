@@ -17,6 +17,7 @@ class QNRSChgmWidget;
 class QNRSDeleteWidget;
 class QNRSCopyWidget;
 class QNRSMoveWidget;
+class QNRSBatchWidget;
 class QNUrlBase64Widget;
 class QNImageView2Widget;
 
@@ -67,6 +68,7 @@ private:
     QNRSCopyWidget *rsCopyWidget;
     QNRSMoveWidget *rsMoveWidget;
     QNRSChgmWidget *rsChgmWidget;
+    QNRSBatchWidget *rsBatchWidget;
 
     //widgets
     QLineEdit *accessKeyLineEdit;

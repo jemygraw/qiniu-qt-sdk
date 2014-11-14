@@ -48,7 +48,8 @@ HEADERS += \
     ui/QNRSDeleteWidget.h \
     ui/QNRSCopyWidget.h \
     ui/QNRSMoveWidget.h \
-    ui/QNRSChgmWidget.h
+    ui/QNRSChgmWidget.h \
+    ui/QNRSBatchWidget.h
 
 
 
@@ -87,7 +88,8 @@ SOURCES += main.cpp \
     ui/QNRSDeleteWidget.cpp \
     ui/QNRSCopyWidget.cpp \
     ui/QNRSMoveWidget.cpp \
-    ui/QNRSChgmWidget.cpp
+    ui/QNRSChgmWidget.cpp \
+    ui/QNRSBatchWidget.cpp
 
 
 

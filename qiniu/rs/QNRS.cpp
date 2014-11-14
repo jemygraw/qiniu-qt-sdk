@@ -198,3 +198,34 @@ QNetworkRequest QNRS::chgmRequest(const QString &bucket, const QString &key,
     request.setRawHeader(contentTypeHeader.toLocal8Bit(),contentTypeHeaderBody.toLocal8Bit());
     return request;
 }
+
+
+//Batch operations
+QNetworkRequest QNRS::batchRequest(const QString &requestBody, const QNMac *mac)
+{
+    QNetworkRequest request;
+    QString reqUrl(QNConf::RS_HOST);
+    reqUrl.append("/batch");
+    request.setUrl(reqUrl);
+
+    //set authorization header
+    QString authHeader("Authorization");
+    QString authHeaderBody("QBox ");
+    QString accessToken;
+    QByteArray requestBodyBytes=requestBody.toLocal8Bit();
+    if(mac!=0)
+    {
+        accessToken=mac->signRequest(request,&requestBodyBytes);
+    }
+    else
+    {
+        QNMac macx=QNMac(QNConf::ACCESS_KEY,QNConf::SECRET_KEY);
+        accessToken=macx.signRequest(request,&requestBodyBytes);
+    }
+    authHeaderBody.append(accessToken);
+    QString contentTypeHeader("Content-Type");
+    QString contentTypeHeaderBody("application/x-www-form-urlencoded");
+    request.setRawHeader(authHeader.toLocal8Bit(),authHeaderBody.toLocal8Bit());
+    request.setRawHeader(contentTypeHeader.toLocal8Bit(),contentTypeHeaderBody.toLocal8Bit());
+    return request;
+}

@@ -9,6 +9,7 @@
 #include "QNRSCopyWidget.h"
 #include "QNRSMoveWidget.h"
 #include "QNRSChgmWidget.h"
+#include "QNRSBatchWidget.h"
 #include <QNetworkAccessManager>
 #include <QLabel>
 #include <QAction>
@@ -143,11 +144,14 @@ void QNMainWindow::createMenus()
     rsChgmAction=new QAction(tr("Chgm"),this);
     QMenu *rsMenu=new QMenu(tr("Resource"));
     rsMenu->addAction(rsStatAction);
+    rsMenu->addSeparator();
     rsMenu->addAction(rsCopyAction);
     rsMenu->addAction(rsMoveAction);
     rsMenu->addAction(rsDeleteAction);
-    rsMenu->addAction(rsBatchAction);
+    rsMenu->addSeparator();
     rsMenu->addAction(rsChgmAction);
+    rsMenu->addSeparator();
+    rsMenu->addAction(rsBatchAction);
 
     //bind signals with slots
     connect(base64Action,SIGNAL(triggered()),this,SLOT(base64Slot()));
@@ -182,6 +186,7 @@ void QNMainWindow::createWidgets()
     rsCopyWidget=0;
     rsMoveWidget=0;
     rsChgmWidget=0;
+    rsBatchWidget=0;
 }
 
 QNMainWindow::~QNMainWindow()
@@ -272,7 +277,11 @@ void QNMainWindow::rsDeleteSlot()
 
 void QNMainWindow::rsBatchSlot()
 {
-
+    if(rsBatchWidget==0)
+    {
+        rsBatchWidget=new QNRSBatchWidget(*networkManager);
+    }
+    rsBatchWidget->show();
 }
 
 void QNMainWindow::rsChgmSlot()

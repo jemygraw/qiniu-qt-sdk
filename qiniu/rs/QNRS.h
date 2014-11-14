@@ -2,7 +2,6 @@
 #define QNRS_H
 
 class QString;
-class QStringList;
 class QNetworkRequest;
 class QNMac;
 class QNRS
@@ -23,7 +22,7 @@ public:
     static QNetworkRequest deleteRequest(const QString &bucket, const QString &key,
                                        const QNMac *mac=0);
 
-    static QNetworkRequest batchRequest(const QStringList &operations,
+    static QNetworkRequest batchRequest(const QString &requestBody,
                                         const QNMac *mac=0);
 
     static QNetworkRequest chgmRequest(const QString &bucket, const QString &key,
