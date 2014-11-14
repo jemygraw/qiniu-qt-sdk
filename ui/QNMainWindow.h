@@ -12,6 +12,7 @@ class QNetworkAccessManager;
 class QNSimpleUploadDataWidget;
 class QNCreateSaveAsTokenWidget;
 class QNCreatePrivateAccessTokenWidget;
+class QNRSStatWidget;
 class QNUrlBase64Widget;
 class QNImageView2Widget;
 
@@ -34,6 +35,13 @@ private:
     QAction *simpleUploadNoKeyAction;
     QAction *simpleUploadWithKeyAction;
 
+    //resource management
+    QAction *rsStatAction;
+    QAction *rsCopyAction;
+    QAction *rsMoveAction;
+    QAction *rsBatchAction;
+    QAction *rsChgmAction;
+
     //image
     QAction *imageView2Action;
 
@@ -48,6 +56,8 @@ private:
     QNUrlBase64Widget *urlBase64Widget;
     QNImageView2Widget *imageView2Widget;
     QNCreatePrivateAccessTokenWidget *createPrivateAccessTokenWidget;
+
+    QNRSStatWidget *rsStatWidget;
 
     //widgets
     QLineEdit *accessKeyLineEdit;
@@ -78,6 +88,12 @@ public slots:
     void imageView2Slot();
     void saveGlobalSettingsSlot();
     void createPrivateAccessTokenSlot();
+
+    void rsStatSlot();
+    void rsCopySlot();
+    void rsMoveSlot();
+    void rsBatchSlot();
+    void rsChgmSlot();
 };
 
 #endif // QNMAINWINDOW_H

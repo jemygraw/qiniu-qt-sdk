@@ -2,6 +2,7 @@
 #define QNSIMPLEUPLOADDATAWIDGET_H
 
 #include <QWidget>
+#include <QNetworkReply>
 
 class QTextEdit;
 class QPushButton;
@@ -33,7 +34,7 @@ signals:
 public slots:
     void uploadData();
     void recvData();
-    void handleError();
+    void handleError(QNetworkReply::NetworkError);
 };
 
 #endif // QNSIMPLEUPLOADDATAWIDGET_H

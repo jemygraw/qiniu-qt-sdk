@@ -42,6 +42,7 @@ void QNCreatePrivateAccessTokenWidget::createLayout()
     QLabel *newUrlLabel=new QLabel(tr("New Url:"));
 
     srcUrlLineEdit=new QLineEdit;
+    srcUrlLineEdit->setPlaceholderText(tr("Required"));
     expireDateTimeEdit=new QDateTimeEdit;
     QDateTime now=QDateTime::currentDateTime();
     now.setOffsetFromUtc(3600*8);

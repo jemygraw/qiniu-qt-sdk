@@ -131,6 +131,7 @@ void QNSimpleUploadDataWidget::uploadData()
     request.setUrl(QUrl(QNConf::UPLOAD_HOST));
     QNetworkReply *reply=this->networkManager->post(request,multiPart);
     connect(reply,SIGNAL(finished()),this,SLOT(recvData()));
+    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,SLOT(handleError(QNetworkReply::NetworkError)));
 
 }
 
@@ -151,7 +152,7 @@ void QNSimpleUploadDataWidget::recvData()
     }
 }
 
-void QNSimpleUploadDataWidget::handleError()
+void QNSimpleUploadDataWidget::handleError(QNetworkReply::NetworkError)
 {
 
 

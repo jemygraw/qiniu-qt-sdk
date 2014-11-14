@@ -10,6 +10,8 @@ TEMPLATE = app
 TARGET = "Qiniu Qt SDK"
 INCLUDEPATH += . ui qiniu test
 
+RC_FILE = qiniu.rc
+
 # Input
 HEADERS += \
         qiniu/auth/QNMac.h \
@@ -41,7 +43,8 @@ HEADERS += \
         ui/QNCreateSaveAsTokenWidget.h \
         ui/QNUrlBase64Widget.h \
         ui/QNImageView2Widget.h \
-        ui/QNCreatePrivateAccessTokenWidget.h
+        ui/QNCreatePrivateAccessTokenWidget.h \
+    ui/QNRSStatWidget.h
 
 
 
@@ -75,7 +78,8 @@ SOURCES += main.cpp \
         ui/QNCreateSaveAsTokenWidget.cpp \
         ui/QNUrlBase64Widget.cpp \
         ui/QNImageView2Widget.cpp \
-        ui/QNCreatePrivateAccessTokenWidget.cpp
+        ui/QNCreatePrivateAccessTokenWidget.cpp \
+    ui/QNRSStatWidget.cpp
 
 
 

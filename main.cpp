@@ -5,7 +5,7 @@
 #include "test/QNUrlTest.h"
 #include "test/QNETagTest.h"
 #include "test/QNPutPolicyTest.h"
-#include <iostream>
+#include <QIcon>
 #include <QApplication>
 #include <QPushButton>
 #include <QDateTime>
@@ -14,6 +14,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc,argv);
+    app.setWindowIcon(QIcon("qiniu.ico"));
     QApplication::setOrganizationName("Qiniu Cloud Storage");
     QApplication::setOrganizationDomain("qiniu.com");
     QApplication::setApplicationName("Qiniu Qt SDK & Tools");

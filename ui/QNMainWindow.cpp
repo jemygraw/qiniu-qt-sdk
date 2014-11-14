@@ -4,6 +4,7 @@
 #include "QNCreatePrivateAccessTokenWidget.h"
 #include "QNUrlBase64Widget.h"
 #include "QNImageView2Widget.h"
+#include "QNRSStatWidget.h"
 #include <QNetworkAccessManager>
 #include <QLabel>
 #include <QAction>
@@ -124,21 +125,41 @@ void QNMainWindow::createMenus()
     createSaveAsTokenAction=new QAction(tr("Create SaveAs Token"),this);
     base64Action=new QAction(tr("Urlsafe Base64 Encode/Decode"),this);
     createPrivateAccessTokenAction=new QAction(tr("Create Private Access Token"),this);
-    QMenu *toolMenu=menuBar()->addMenu(tr("Tools"));
+    QMenu *toolMenu=new QMenu(tr("Tools"));
     toolMenu->addAction(base64Action);
     toolMenu->addAction(createSaveAsTokenAction);
     toolMenu->addAction(createPrivateAccessTokenAction);
 
+    //resource management
+    rsStatAction=new QAction(tr("Stat"),this);
+    rsCopyAction=new QAction(tr("Copy"),this);
+    rsMoveAction=new QAction(tr("Move"),this);
+    rsBatchAction=new QAction(tr("Batch"),this);
+    rsChgmAction=new QAction(tr("Chgm"),this);
+    QMenu *rsMenu=new QMenu(tr("Resource"));
+    rsMenu->addAction(rsStatAction);
+    rsMenu->addAction(rsCopyAction);
+    rsMenu->addAction(rsMoveAction);
+    rsMenu->addAction(rsBatchAction);
+    rsMenu->addAction(rsChgmAction);
 
+    //bind signals with slots
     connect(base64Action,SIGNAL(triggered()),this,SLOT(base64Slot()));
     connect(createSaveAsTokenAction,SIGNAL(triggered()),this,SLOT(createSaveAsTokenSlot()));
     connect(imageView2Action,SIGNAL(triggered()),this,SLOT(imageView2Slot()));
     connect(createPrivateAccessTokenAction,SIGNAL(triggered()),this,SLOT(createPrivateAccessTokenSlot()));
 
+    connect(rsStatAction,SIGNAL(triggered()),this,SLOT(rsStatSlot()));
+    connect(rsCopyAction,SIGNAL(triggered()),this,SLOT(rsCopySlot()));
+    connect(rsMoveAction,SIGNAL(triggered()),this,SLOT(rsMoveSlot()));
+    connect(rsBatchAction,SIGNAL(triggered()),this,SLOT(rsBatchSlot()));
+    connect(rsChgmAction,SIGNAL(triggered()),this,SLOT(rsChgmSlot()));
+
     menuBar()->addMenu(sysMenu);
     menuBar()->addMenu(uploadMenu);
     menuBar()->addMenu(imageMenu);
     menuBar()->addMenu(toolMenu);
+    menuBar()->addMenu(rsMenu);
 }
 
 void QNMainWindow::createWidgets()
@@ -149,6 +170,7 @@ void QNMainWindow::createWidgets()
     urlBase64Widget=0;
     imageView2Widget=0;
     createPrivateAccessTokenWidget=0;
+    rsStatWidget=0;
 }
 
 QNMainWindow::~QNMainWindow()
@@ -199,6 +221,35 @@ void QNMainWindow::createPrivateAccessTokenSlot()
         createPrivateAccessTokenWidget=new QNCreatePrivateAccessTokenWidget();
     }
     this->createPrivateAccessTokenWidget->show();
+}
+
+void QNMainWindow::rsStatSlot()
+{
+    if(rsStatWidget==0)
+    {
+        rsStatWidget=new QNRSStatWidget(*networkManager);
+    }
+    rsStatWidget->show();
+}
+
+void QNMainWindow::rsCopySlot()
+{
+
+}
+
+void QNMainWindow::rsMoveSlot()
+{
+
+}
+
+void QNMainWindow::rsBatchSlot()
+{
+
+}
+
+void QNMainWindow::rsChgmSlot()
+{
+
 }
 
 void QNMainWindow::saveGlobalSettingsSlot()
