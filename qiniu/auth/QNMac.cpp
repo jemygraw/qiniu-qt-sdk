@@ -59,11 +59,10 @@ QString QNMac::signWithData(const QByteArray &data) const
 // 2. Use hmac sha1 algorithm to sign the url in step1
 // 3. Use url safe base64 encoding to encode the result data from step2
 // 4. Join access key and the result string from step3 with ':'
-QString QNMac::signRequest(const QNetworkRequest &request,const QByteArray *bodyData) const
+QString QNMac::signRequest(const QUrl &requestUrl, const QByteArray *bodyData) const
 {
-    QUrl uri=request.url();
-    QString path=uri.path();
-    QString query=uri.query();
+    QString path=requestUrl.path();
+    QString query=requestUrl.query();
     QByteArray dataToSign=path.toUtf8();
     // check query whether empty
     if(!query.isEmpty()){
@@ -80,4 +79,10 @@ QString QNMac::signRequest(const QNetworkRequest &request,const QByteArray *body
     QString retStr=QString(this->accessKey);
     retStr.append(":").append(encodedSignedData);
     return retStr;
+}
+
+QString QNMac::signRequest(const QNetworkRequest &request,const QByteArray *bodyData) const
+{
+     QUrl requestUrl=request.url();
+     return signRequest(requestUrl, bodyData);
 }

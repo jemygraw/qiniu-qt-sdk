@@ -6,6 +6,7 @@
 class QString;
 class QByteArray;
 class QNetworkRequest;
+class QUrl;
 
 class QNMac
 {
@@ -18,6 +19,7 @@ public:
     ~QNMac();
     QString sign(const QByteArray &data) const;
     QString signWithData(const QByteArray &data) const;
+    QString signRequest(const QUrl &reqestUrl, const QByteArray *bodyData=0) const;
     QString signRequest(const QNetworkRequest &request, const QByteArray *bodyData=0) const;
 };
 
