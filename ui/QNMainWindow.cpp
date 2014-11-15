@@ -3,6 +3,7 @@
 #include "QNCreateSaveAsTokenWidget.h"
 #include "QNCreatePrivateAccessTokenWidget.h"
 #include "QNUrlSafeBase64Widget.h"
+#include "QNCreateRSManageOperationWidget.h"
 #include "QNImageView2Widget.h"
 #include "QNRSStatWidget.h"
 #include "QNRSDeleteWidget.h"
@@ -130,10 +131,15 @@ void QNMainWindow::createMenus()
     createSaveAsTokenAction=new QAction(tr("Create SaveAs Token"),this);
     urlsafeBase64Action=new QAction(tr("Urlsafe Base64 Encode/Decode"),this);
     createPrivateAccessTokenAction=new QAction(tr("Create Private Access Token"),this);
+    createBatchOperationAction=new QAction(tr("Create RS Manage Operation"),this);
     QMenu *toolMenu=new QMenu(tr("Tools"));
     toolMenu->addAction(urlsafeBase64Action);
+    toolMenu->addSeparator();
     toolMenu->addAction(createSaveAsTokenAction);
+    toolMenu->addSeparator();
     toolMenu->addAction(createPrivateAccessTokenAction);
+    toolMenu->addSeparator();
+    toolMenu->addAction(createBatchOperationAction);
 
     //resource management
     rsStatAction=new QAction(tr("Stat"),this);
@@ -158,6 +164,7 @@ void QNMainWindow::createMenus()
     connect(createSaveAsTokenAction,SIGNAL(triggered()),this,SLOT(createSaveAsTokenSlot()));
     connect(imageView2Action,SIGNAL(triggered()),this,SLOT(imageView2Slot()));
     connect(createPrivateAccessTokenAction,SIGNAL(triggered()),this,SLOT(createPrivateAccessTokenSlot()));
+    connect(createBatchOperationAction,SIGNAL(triggered()),this,SLOT(createRSManageOperationSlot()));
 
     connect(rsStatAction,SIGNAL(triggered()),this,SLOT(rsStatSlot()));
     connect(rsCopyAction,SIGNAL(triggered()),this,SLOT(rsCopySlot()));
@@ -177,10 +184,13 @@ void QNMainWindow::createWidgets()
 {
     //init
     simpleUploadDataWidget=0;
+
     createSaveAsTokenWidget=0;
     urlsafeBase64Widget=0;
     imageView2Widget=0;
     createPrivateAccessTokenWidget=0;
+    createRSManageOperationWidget=0;
+
     rsStatWidget=0;
     rsDeleteWidget=0;
     rsCopyWidget=0;
@@ -239,6 +249,15 @@ void QNMainWindow::createPrivateAccessTokenSlot()
     this->createPrivateAccessTokenWidget->show();
 }
 
+void QNMainWindow::createRSManageOperationSlot()
+{
+    if(createRSManageOperationWidget==0)
+    {
+        createRSManageOperationWidget=new QNCreateRSManageOperationWidget();
+    }
+    this->createRSManageOperationWidget->show();
+}
+
 void QNMainWindow::rsStatSlot()
 {
     if(rsStatWidget==0)
@@ -292,6 +311,8 @@ void QNMainWindow::rsChgmSlot()
     }
     rsChgmWidget->show();
 }
+
+
 
 void QNMainWindow::saveGlobalSettingsSlot()
 {

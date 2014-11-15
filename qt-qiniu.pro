@@ -49,7 +49,8 @@ HEADERS += \
     ui/QNRSMoveWidget.h \
     ui/QNRSChgmWidget.h \
     ui/QNRSBatchWidget.h \
-    ui/QNUrlSafeBase64Widget.h
+    ui/QNUrlSafeBase64Widget.h \
+    ui/QNCreateRSManageOperationWidget.h
 
 
 
@@ -89,7 +90,8 @@ SOURCES += main.cpp \
     ui/QNRSMoveWidget.cpp \
     ui/QNRSChgmWidget.cpp \
     ui/QNRSBatchWidget.cpp \
-    ui/QNUrlSafeBase64Widget.cpp
+    ui/QNUrlSafeBase64Widget.cpp \
+    ui/QNCreateRSManageOperationWidget.cpp
 
 
 
