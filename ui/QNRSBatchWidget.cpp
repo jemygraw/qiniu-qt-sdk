@@ -46,16 +46,16 @@ void QNRSBatchWidget::createLayout()
     batchResultTextEdit->setReadOnly(true);
     batchResultTextEdit->setAcceptRichText(false);
 
-    mainGridLayout->addWidget(accessKeyLabel,0,0);
-    mainGridLayout->addWidget(accessKeyLineEdit,0,1);
-    mainGridLayout->addWidget(secretKeyLabel,1,0);
-    mainGridLayout->addWidget(secretKeyLineEdit,1,1);
-    mainGridLayout->addWidget(batchOperationsLabel,2,0);
-    mainGridLayout->addWidget(batchOperationsTextEdit,2,1);
-    mainGridLayout->addWidget(batchResultHttpCodeLabel,3,0);
-    mainGridLayout->addWidget(batchResultHttpCodeLineEdit);
-    mainGridLayout->addWidget(batchResultLabel,4,0);
-    mainGridLayout->addWidget(batchResultTextEdit,4,1);
+    mainGridLayout->addWidget(batchOperationsLabel,0,0,1,2);
+    mainGridLayout->addWidget(batchOperationsTextEdit,1,0,1,2);
+    mainGridLayout->addWidget(accessKeyLabel,2,0);
+    mainGridLayout->addWidget(accessKeyLineEdit,2,1);
+    mainGridLayout->addWidget(secretKeyLabel,3,0);
+    mainGridLayout->addWidget(secretKeyLineEdit,3,1);
+    mainGridLayout->addWidget(batchResultHttpCodeLabel,4,0);
+    mainGridLayout->addWidget(batchResultHttpCodeLineEdit,4,1);
+    mainGridLayout->addWidget(batchResultLabel,5,0,1,2);
+    mainGridLayout->addWidget(batchResultTextEdit,6,0,1,2);
 
     QHBoxLayout *actionLayout=new QHBoxLayout;
     batchButton=new QPushButton(tr("Batch"));
