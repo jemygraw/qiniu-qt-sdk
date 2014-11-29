@@ -31,6 +31,8 @@ public:
     static QNetworkRequest fetchRequest(const QString &fetchUrl, const QString &saveBucket,
                                         const QString &saveKey,
                                         const QNMac *mac=0);
+    static QNetworkRequest prefetchRequest(const QString &bucket, const QString &key,
+                                           const QNMac *mac=0);
 };
 
 #endif // QNRS_H

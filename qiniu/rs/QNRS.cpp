@@ -267,3 +267,37 @@ QNetworkRequest QNRS::fetchRequest(const QString &fetchUrl,
     request.setRawHeader(contentTypeHeader.toLocal8Bit(),contentTypeHeaderBody.toLocal8Bit());
     return request;
 }
+
+//Prefetch mirror resource
+QNetworkRequest QNRS::prefetchRequest(const QString &bucket, const QString &key,
+                                      const QNMac *mac)
+{
+    QNetworkRequest request;
+    QString reqUrl(QNConf::IOVIP_HOST);
+    reqUrl.append("/prefetch/");
+    QString entryUrl;
+    entryUrl.append(bucket).append(":").append(key);
+    QString encodedEntryUrl=QNUtils::urlSafeBase64Encode(entryUrl.toLocal8Bit());
+    reqUrl.append(encodedEntryUrl);
+    request.setUrl(reqUrl);
+
+    //set authorization header
+    QString authHeader("Authorization");
+    QString authHeaderBody("QBox ");
+    QString accessToken;
+    if(mac!=0)
+    {
+        accessToken=mac->signRequest(request);
+    }
+    else
+    {
+        QNMac macx=QNMac(QNConf::ACCESS_KEY,QNConf::SECRET_KEY);
+        accessToken=macx.signRequest(request);
+    }
+    authHeaderBody.append(accessToken);
+    QString contentTypeHeader("Content-Type");
+    QString contentTypeHeaderBody("application/x-www-form-urlencoded");
+    request.setRawHeader(authHeader.toLocal8Bit(),authHeaderBody.toLocal8Bit());
+    request.setRawHeader(contentTypeHeader.toLocal8Bit(),contentTypeHeaderBody.toLocal8Bit());
+    return request;
+}

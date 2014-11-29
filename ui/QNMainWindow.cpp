@@ -13,6 +13,7 @@
 #include "QNRSChgmWidget.h"
 #include "QNRSBatchWidget.h"
 #include "QNRSFetchWidget.h"
+#include "QNRSPrefetchWidget.h"
 #include <QNetworkAccessManager>
 #include <QLabel>
 #include <QAction>
@@ -153,6 +154,7 @@ void QNMainWindow::createMenus()
     rsBatchAction=new QAction(tr("Batch"),this);
     rsChgmAction=new QAction(tr("Chgm"),this);
     rsFetchAction=new QAction(tr("Fetch"),this);
+    rsPrefetchAction=new QAction(tr("Prefetch"),this);
     QMenu *rsMenu=new QMenu(tr("Resource"));
     rsMenu->addAction(rsStatAction);
     rsMenu->addSeparator();
@@ -165,6 +167,8 @@ void QNMainWindow::createMenus()
     rsMenu->addAction(rsBatchAction);
     rsMenu->addSeparator();
     rsMenu->addAction(rsFetchAction);
+    rsMenu->addSeparator();
+    rsMenu->addAction(rsPrefetchAction);
 
     //bind signals with slots
     connect(urlsafeBase64Action,SIGNAL(triggered()),this,SLOT(base64Slot()));
@@ -181,6 +185,7 @@ void QNMainWindow::createMenus()
     connect(rsBatchAction,SIGNAL(triggered()),this,SLOT(rsBatchSlot()));
     connect(rsChgmAction,SIGNAL(triggered()),this,SLOT(rsChgmSlot()));
     connect(rsFetchAction,SIGNAL(triggered()),this,SLOT(rsFetchSlot()));
+    connect(rsPrefetchAction,SIGNAL(triggered()),this,SLOT(rsPrefetchSlot()));
 
     menuBar()->addMenu(sysMenu);
     menuBar()->addMenu(uploadMenu);
@@ -208,6 +213,7 @@ void QNMainWindow::createWidgets()
     rsChgmWidget=0;
     rsBatchWidget=0;
     rsFetchWidget=0;
+    rsPrefetchWidget=0;
 }
 
 QNMainWindow::~QNMainWindow()
@@ -339,6 +345,15 @@ void QNMainWindow::rsFetchSlot()
         rsFetchWidget=new QNRSFetchWidget(*networkManager);
     }
     rsFetchWidget->show();
+}
+
+void QNMainWindow::rsPrefetchSlot()
+{
+    if(rsPrefetchWidget==0)
+    {
+        rsPrefetchWidget=new QNRSPrefetchWidget(*networkManager);
+    }
+    rsPrefetchWidget->show();
 }
 
 void QNMainWindow::saveGlobalSettingsSlot()

@@ -21,6 +21,7 @@ class QNRSCopyWidget;
 class QNRSMoveWidget;
 class QNRSBatchWidget;
 class QNRSFetchWidget;
+class QNRSPrefetchWidget;
 class QNUrlSafeBase64Widget;
 class QNImageView2Widget;
 
@@ -53,6 +54,7 @@ private:
     QAction *rsBatchAction;
     QAction *rsChgmAction;
     QAction *rsFetchAction;
+    QAction *rsPrefetchAction;
 
     //image
     QAction *imageView2Action;
@@ -78,6 +80,7 @@ private:
     QNRSChgmWidget *rsChgmWidget;
     QNRSBatchWidget *rsBatchWidget;
     QNRSFetchWidget *rsFetchWidget;
+    QNRSPrefetchWidget *rsPrefetchWidget;
 
     //widgets
     QLineEdit *accessKeyLineEdit;
@@ -118,6 +121,7 @@ public slots:
     void rsBatchSlot();
     void rsChgmSlot();
     void rsFetchSlot();
+    void rsPrefetchSlot();
 };
 
 #endif // QNMAINWINDOW_H

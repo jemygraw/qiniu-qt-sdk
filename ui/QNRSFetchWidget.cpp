@@ -1,5 +1,4 @@
 #include "QNRSFetchWidget.h"
-#include "qiniu/utils/QNUtils.h"
 #include "qiniu/rs/QNRS.h"
 #include "qiniu/auth/QNMac.h"
 #include <QNetworkAccessManager>
