@@ -12,6 +12,7 @@ class QNetworkAccessManager;
 class QNSimpleUploadDataWidget;
 class QNCreateSaveAsTokenWidget;
 class QNCreatePrivateAccessTokenWidget;
+class QNCreateRSManageTokenWidget;
 class QNCreateRSManageOperationWidget;
 class QNRSStatWidget;
 class QNRSChgmWidget;
@@ -19,6 +20,7 @@ class QNRSDeleteWidget;
 class QNRSCopyWidget;
 class QNRSMoveWidget;
 class QNRSBatchWidget;
+class QNRSFetchWidget;
 class QNUrlSafeBase64Widget;
 class QNImageView2Widget;
 
@@ -35,6 +37,7 @@ private:
     QAction *createSaveAsTokenAction;
     QAction *urlsafeBase64Action;
     QAction *createPrivateAccessTokenAction;
+    QAction *createRSManageTokenAction;
     QAction *createBatchOperationAction;
 
     //upload menu
@@ -49,6 +52,7 @@ private:
     QAction *rsDeleteAction;
     QAction *rsBatchAction;
     QAction *rsChgmAction;
+    QAction *rsFetchAction;
 
     //image
     QAction *imageView2Action;
@@ -64,6 +68,7 @@ private:
     QNUrlSafeBase64Widget *urlsafeBase64Widget;
     QNImageView2Widget *imageView2Widget;
     QNCreatePrivateAccessTokenWidget *createPrivateAccessTokenWidget;
+    QNCreateRSManageTokenWidget *createRSManageTokenWidget;
     QNCreateRSManageOperationWidget *createRSManageOperationWidget;
 
     QNRSStatWidget *rsStatWidget;
@@ -72,6 +77,7 @@ private:
     QNRSMoveWidget *rsMoveWidget;
     QNRSChgmWidget *rsChgmWidget;
     QNRSBatchWidget *rsBatchWidget;
+    QNRSFetchWidget *rsFetchWidget;
 
     //widgets
     QLineEdit *accessKeyLineEdit;
@@ -102,6 +108,7 @@ public slots:
     void imageView2Slot();
     void saveGlobalSettingsSlot();
     void createPrivateAccessTokenSlot();
+    void createRSManageTokenSlot();
     void createRSManageOperationSlot();
 
     void rsStatSlot();
@@ -110,6 +117,7 @@ public slots:
     void rsDeleteSlot();
     void rsBatchSlot();
     void rsChgmSlot();
+    void rsFetchSlot();
 };
 
 #endif // QNMAINWINDOW_H

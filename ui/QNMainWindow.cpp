@@ -2,8 +2,9 @@
 #include "QNSimpleUploadDataWidget.h"
 #include "QNCreateSaveAsTokenWidget.h"
 #include "QNCreatePrivateAccessTokenWidget.h"
-#include "QNUrlSafeBase64Widget.h"
+#include "QNCreateRSManageTokenWidget.h"
 #include "QNCreateRSManageOperationWidget.h"
+#include "QNUrlSafeBase64Widget.h"
 #include "QNImageView2Widget.h"
 #include "QNRSStatWidget.h"
 #include "QNRSDeleteWidget.h"
@@ -11,6 +12,7 @@
 #include "QNRSMoveWidget.h"
 #include "QNRSChgmWidget.h"
 #include "QNRSBatchWidget.h"
+#include "QNRSFetchWidget.h"
 #include <QNetworkAccessManager>
 #include <QLabel>
 #include <QAction>
@@ -131,6 +133,7 @@ void QNMainWindow::createMenus()
     createSaveAsTokenAction=new QAction(tr("Create SaveAs Token"),this);
     urlsafeBase64Action=new QAction(tr("Urlsafe Base64 Encode/Decode"),this);
     createPrivateAccessTokenAction=new QAction(tr("Create Private Access Token"),this);
+    createRSManageTokenAction=new QAction(tr("Create RS Manage Token"),this);
     createBatchOperationAction=new QAction(tr("Create RS Manage Operation"),this);
     QMenu *toolMenu=new QMenu(tr("Tools"));
     toolMenu->addAction(urlsafeBase64Action);
@@ -138,6 +141,7 @@ void QNMainWindow::createMenus()
     toolMenu->addAction(createSaveAsTokenAction);
     toolMenu->addSeparator();
     toolMenu->addAction(createPrivateAccessTokenAction);
+    toolMenu->addAction(createRSManageTokenAction);
     toolMenu->addSeparator();
     toolMenu->addAction(createBatchOperationAction);
 
@@ -148,6 +152,7 @@ void QNMainWindow::createMenus()
     rsDeleteAction=new QAction(tr("Delete"),this);
     rsBatchAction=new QAction(tr("Batch"),this);
     rsChgmAction=new QAction(tr("Chgm"),this);
+    rsFetchAction=new QAction(tr("Fetch"),this);
     QMenu *rsMenu=new QMenu(tr("Resource"));
     rsMenu->addAction(rsStatAction);
     rsMenu->addSeparator();
@@ -158,12 +163,15 @@ void QNMainWindow::createMenus()
     rsMenu->addAction(rsChgmAction);
     rsMenu->addSeparator();
     rsMenu->addAction(rsBatchAction);
+    rsMenu->addSeparator();
+    rsMenu->addAction(rsFetchAction);
 
     //bind signals with slots
     connect(urlsafeBase64Action,SIGNAL(triggered()),this,SLOT(base64Slot()));
     connect(createSaveAsTokenAction,SIGNAL(triggered()),this,SLOT(createSaveAsTokenSlot()));
     connect(imageView2Action,SIGNAL(triggered()),this,SLOT(imageView2Slot()));
     connect(createPrivateAccessTokenAction,SIGNAL(triggered()),this,SLOT(createPrivateAccessTokenSlot()));
+    connect(createRSManageTokenAction,SIGNAL(triggered()),this,SLOT(createRSManageTokenSlot()));
     connect(createBatchOperationAction,SIGNAL(triggered()),this,SLOT(createRSManageOperationSlot()));
 
     connect(rsStatAction,SIGNAL(triggered()),this,SLOT(rsStatSlot()));
@@ -172,6 +180,7 @@ void QNMainWindow::createMenus()
     connect(rsDeleteAction,SIGNAL(triggered()),this,SLOT(rsDeleteSlot()));
     connect(rsBatchAction,SIGNAL(triggered()),this,SLOT(rsBatchSlot()));
     connect(rsChgmAction,SIGNAL(triggered()),this,SLOT(rsChgmSlot()));
+    connect(rsFetchAction,SIGNAL(triggered()),this,SLOT(rsFetchSlot()));
 
     menuBar()->addMenu(sysMenu);
     menuBar()->addMenu(uploadMenu);
@@ -189,6 +198,7 @@ void QNMainWindow::createWidgets()
     urlsafeBase64Widget=0;
     imageView2Widget=0;
     createPrivateAccessTokenWidget=0;
+    createRSManageTokenWidget=0;
     createRSManageOperationWidget=0;
 
     rsStatWidget=0;
@@ -197,6 +207,7 @@ void QNMainWindow::createWidgets()
     rsMoveWidget=0;
     rsChgmWidget=0;
     rsBatchWidget=0;
+    rsFetchWidget=0;
 }
 
 QNMainWindow::~QNMainWindow()
@@ -247,6 +258,15 @@ void QNMainWindow::createPrivateAccessTokenSlot()
         createPrivateAccessTokenWidget=new QNCreatePrivateAccessTokenWidget();
     }
     this->createPrivateAccessTokenWidget->show();
+}
+
+void QNMainWindow::createRSManageTokenSlot()
+{
+    if(createRSManageTokenWidget==0)
+    {
+        createRSManageTokenWidget=new QNCreateRSManageTokenWidget();
+    }
+    this->createRSManageTokenWidget->show();
 }
 
 void QNMainWindow::createRSManageOperationSlot()
@@ -312,7 +332,14 @@ void QNMainWindow::rsChgmSlot()
     rsChgmWidget->show();
 }
 
-
+void QNMainWindow::rsFetchSlot()
+{
+    if(rsFetchWidget==0)
+    {
+        rsFetchWidget=new QNRSFetchWidget(*networkManager);
+    }
+    rsFetchWidget->show();
+}
 
 void QNMainWindow::saveGlobalSettingsSlot()
 {

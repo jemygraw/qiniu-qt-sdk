@@ -229,3 +229,41 @@ QNetworkRequest QNRS::batchRequest(const QString &requestBody, const QNMac *mac)
     request.setRawHeader(contentTypeHeader.toLocal8Bit(),contentTypeHeaderBody.toLocal8Bit());
     return request;
 }
+
+//Fetch remote resource
+QNetworkRequest QNRS::fetchRequest(const QString &fetchUrl,
+                                   const QString &saveBucket, const QString &saveKey,
+                                   const QNMac *mac)
+{
+    QNetworkRequest request;
+    QString reqUrl(QNConf::IOVIP_HOST);
+    reqUrl.append("/fetch/");
+    QString encodedFetchUrl=QNUtils::urlSafeBase64Encode(fetchUrl.toLocal8Bit());
+    reqUrl.append(encodedFetchUrl);
+    QString entryUrl;
+    entryUrl.append(saveBucket).append(":").append(saveKey);
+    QString encodedEntryUrl=QNUtils::urlSafeBase64Encode(entryUrl.toLocal8Bit());
+    reqUrl.append("/to/");
+    reqUrl.append(encodedEntryUrl);
+    request.setUrl(reqUrl);
+
+    //set authorization header
+    QString authHeader("Authorization");
+    QString authHeaderBody("QBox ");
+    QString accessToken;
+    if(mac!=0)
+    {
+        accessToken=mac->signRequest(request);
+    }
+    else
+    {
+        QNMac macx=QNMac(QNConf::ACCESS_KEY,QNConf::SECRET_KEY);
+        accessToken=macx.signRequest(request);
+    }
+    authHeaderBody.append(accessToken);
+    QString contentTypeHeader("Content-Type");
+    QString contentTypeHeaderBody("application/x-www-form-urlencoded");
+    request.setRawHeader(authHeader.toLocal8Bit(),authHeaderBody.toLocal8Bit());
+    request.setRawHeader(contentTypeHeader.toLocal8Bit(),contentTypeHeaderBody.toLocal8Bit());
+    return request;
+}

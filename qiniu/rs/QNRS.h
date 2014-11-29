@@ -28,6 +28,9 @@ public:
     static QNetworkRequest chgmRequest(const QString &bucket, const QString &key,
                                        const QString &newMimeType,
                                        const QNMac *mac=0);
+    static QNetworkRequest fetchRequest(const QString &fetchUrl, const QString &saveBucket,
+                                        const QString &saveKey,
+                                        const QNMac *mac=0);
 };
 
 #endif // QNRS_H
