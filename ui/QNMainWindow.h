@@ -111,7 +111,6 @@ public slots:
     void imageView2Slot();
     void saveGlobalSettingsSlot();
     void createPrivateAccessTokenSlot();
-    void createRSManageTokenSlot();
     void createRSManageOperationSlot();
 
     void rsStatSlot();

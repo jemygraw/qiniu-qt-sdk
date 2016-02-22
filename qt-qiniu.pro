@@ -51,7 +51,6 @@ HEADERS += \
         ui/QNRSBatchWidget.h \
         ui/QNUrlSafeBase64Widget.h \
         ui/QNCreateRSManageOperationWidget.h \
-        ui/QNCreateRSManageTokenWidget.h \
         ui/QNRSFetchWidget.h \
     ui/QNRSPrefetchWidget.h
 
@@ -95,7 +94,6 @@ SOURCES += main.cpp \
         ui/QNRSBatchWidget.cpp \
         ui/QNUrlSafeBase64Widget.cpp \
         ui/QNCreateRSManageOperationWidget.cpp \
-        ui/QNCreateRSManageTokenWidget.cpp \
         ui/QNRSFetchWidget.cpp \
     ui/QNRSPrefetchWidget.cpp
 
